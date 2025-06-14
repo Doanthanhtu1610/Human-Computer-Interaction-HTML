@@ -161,7 +161,7 @@
                                     đầu thực tập <span class="text-red-500">*</span></label>
                                 <div class="relative"> <span class="input-icon"><i
                                             class="fas fa-calendar-alt"></i></span>
-                                    <input type="text" name="start-date" id="start-date" placeholder="dd/mm/yyyy"
+                                    <input type="text" name="start-date" id="start-date" placeholder="mm/dd/yyyy"
                                         class="form-input with-icon block w-full py-2 px-3 border date-placeholder">
                                 </div>
                                 <p id="start-date-message" class="form-message text-red-600 hidden"></p>
@@ -238,23 +238,25 @@
                     <button id="close-verification-modal" class="text-2xl leading-none">&times;</button>
                 </div>
                 <div class="p-6">
-                    <h4 class="text-lg font-semibold mb-2">Nhập mã xác nhận</h4>
-                    <p class="text-sm text-gray-600 mb-4" id="verification-instruction">
+                    <h4 class="text-lg font-semibold mb-2 text-center">Nhập mã xác nhận</h4>
+                    <p class="text-sm text-gray-600 mb-4 text-center" id="verification-instruction">
                         Mã xác nhận đã được gửi đến email: <strong class="font-medium"
-                            id="verification-email"></strong>. Vui lòng kiểm tra email và nhập mã xác nhận vào ô bên
-                        dưới.
+                            id="verification-email"></strong>. Vui lòng kiểm tra email và nhập mã xác nhận vào ô bên dưới.
                     </p>
 
                     <p id="simulated-code-display"
-                        class="text-sm text-blue-600 font-semibold bg-blue-100 p-2 rounded-md my-2 hidden"></p>
+                        class="text-sm text-blue-600 font-semibold bg-blue-100 p-2 rounded-md my-2 hidden text-center"></p>
 
-                    <label for="verification-code-input" class="block text-sm font-medium text-gray-700 mb-1">Mã xác
-                        nhận</label>
-                    <input type="text" id="verification-code-input" name="verification-code-input"
-                        placeholder="Nhập mã xác nhận..." class="form-input block w-full py-2 px-3 border">
-                    <p id="verification-error" class="text-red-500 text-sm mt-1 hidden">Vui lòng nhập mã xác nhận đã
-                        được gửi về email.</p>
-                    <button id="submit-verification-code" class="btn-primary w-full mt-4 py-2.5">Xác nhận</button>
+                    <label for="verification-code-input" class="block text-sm font-medium text-gray-700 mb-1 text-left">Mã xác nhận</label>
+                    <div class="relative flex items-center mb-1">
+                        <span id="verification-envelope-icon" class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="text" id="verification-code-input" name="verification-code-input"
+                            placeholder="Nhập mã xác nhận..." class="form-input block w-full py-2 pl-10 pr-3 border" autocomplete="off">
+                    </div>
+                    <p id="verification-error" class="text-red-500 text-xs mt-1 mb-2 hidden text-left">Vui lòng nhập mã xác nhận đã được gửi về email.</p>
+                    <button id="submit-verification-code" class="btn-primary w-full mt-2 py-2.5">Xác nhận</button>
                 </div>
             </div>
         </div>

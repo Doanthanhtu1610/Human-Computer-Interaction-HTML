@@ -181,6 +181,7 @@ function initDangKyPage() {
     const verificationEmail = document.getElementById('verification-email');
     const verificationCodeInput = document.getElementById('verification-code-input');
     const verificationError = document.getElementById('verification-error');
+    const verificationEnvelopeIcon = document.getElementById('verification-envelope-icon');
     const simulatedCodeDisplay = document.getElementById('simulated-code-display'); // Lấy element mới
 
     // Conditional elements
@@ -199,11 +200,71 @@ function initDangKyPage() {
 
     // --- State & Simulated Data ---
     let generatedCode = null;
-    const SIMULATED_EXISTING_STUDENT_IDS = ["2251172557", "1234567890", "0987654321"];
+    const SIMULATED_EXISTING_STUDENT_IDS = ["2251172557", "1234567890", "0987654321", "2251172540", "2251172266", "2251172279",
+        "2251172272", "2251172371", "2251172378", "2251172518", "2251172455", "2251172290", "2251172533", "2251172540", "2251172244",
+        "2251172491", "2251172339", "2251172467", "2251172276", "2251172345", "2251172405", "2251172416", "2251172369", "2251172224",
+        "2251172267", "2251172435", "2251172388", "2251172387", "2251172465", "2251172368", "2251172367", "2251172383", "2151173831",
+        "2251172348", "2251172298", "2251172502", "2251172564", "2251172450", "2251172356", "2251172264", "2251172355", "2251172354",
+        "2251172325", "2251172410", "2251172546", "2251172281", "2251172417", "2251172253", "2251172534", "2251172419", "2251172294",
+        "2251172474", "2251172530", "2251172523", "2251172510"];
     const STUDENT_ID_TO_NAME = {
+        "2251172266": "Đinh Quang Đạt",
+        "2251172371": "Bùi Khắc Huy",
+        "2251172279": "Nguyễn Thành Đồng",
+        "2251172272": "Trần Tiến Đạt",
+        "2251172378": "Vũ Xuân Huy",
+        "2251172518": "Hoàng Thanh Thuỷ",
+        "2251172455": "Nguyễn Ngọc Phước",
+        "2251172290": "Nguyễn Lê Đức",
+        "2251172533": "Ngô Minh Trung",
+        "2251172540": "Đoàn Thanh Tú",
         "2251172557": "Hoàng Quang Vinh",
-        "1234567890": "Nguyễn Văn A",
-        "0987654321": "Trần Thị B"
+        "2251172244": "Ngô Thị Ngọc Ánh",
+        "2251172491": "Lê Sỹ Thắng",
+        "2251172339": "Bùi Viết Hiển",
+        "2251172467": "Trần Hồng Quang",
+        "2251172276": "Nguyễn Thị Dinh",
+        "2251172345": "Nguyễn Quang Hiếu",
+        "2251172405": "Lương Thị Thùy Liên",
+        "2251172416": "Đỗ Thị Hiền Lương",
+        "2251172369": "Bạch Quốc Huy",
+        "2251172224": "Lăng Tuấn Anh",
+        "2251172267": "Đỗ Văn Đat",
+        "2251172435": "Tạ Thị Hồng Ngát",
+        "2251172388": "Trần Gia Khánh",
+        "2251172387": "Mai Sỹ Duy Khánh",
+        "2251172465": "Nguyễn Văn Quang",
+        "2251172368": "Chu Mạnh Hữu",
+        "2251172367": "Vũ Đăng Hưởng",
+        "2251172383": "Vũ Quang Khải",
+        "2251172562": "Phạm Quý Vũ",
+        "2251172321": "Nguyễn Vũ Tùng Duy",
+        "2251172225": "Lê Đình Anh",
+        "2251172330": "Lê Văn Hải",
+        "2251172351": "Bùi Trí Hoàng",
+        "2151173831": "Khuất Văn Trường",
+        "2251172348": "Vũ Ngọc Hiếu",
+        "2251172298": "Đỗ Tuấn Dũng",
+        "2251172502": "Nguyễn Quang Thành",
+        "2251172564": "Nguyễn Minh Vương",
+        "2251172450": "Nguyễn Duy Phong",
+        "2251172356": "Trần Việt Hoàng",
+        "2251172264": "Trần Công Danh",
+        "2251172355": "Nguyễn Tuấn Hoàng",
+        "2251172354": "Nguyễn Sinh Hoàng",
+        "2251172325": "Tạ Ngọc Hà",
+        "2251172410": "Lê Xuân Lộc",
+        "2251172546": "Lại Minh Tuấn",
+        "2251172281": "Bùi Mạnh Đức",
+        "2251172417": "Lê Thanh Lương",
+        "2251172253": "Lê Đức Chiến",
+        "2251172534": "Nguyễn Thành Trung",
+        "2251172419": "Đỗ Mạnh Mạnh",
+        "2251172294": "Trần Văn Đức",
+        "2251172474": "Hoàng Văn Quyết",
+        "2251172530": "Nguyễn Tiến Trọng",
+        "2251172523": "Nguyễn Minh Tiến",
+        "2251172510": "Đỗ Văn Thiệu"
     };
 
     // --- Functions (No changes in these sub-functions) ---
@@ -235,7 +296,7 @@ function initDangKyPage() {
             return false;
         }
         if (!/^\d{10}$/.test(idValue)) {
-            showFieldMessage(studentIdMessage, "Mã sinh viên phải là 10 chữ số.", true, 0);
+            showFieldMessage(studentIdMessage, "Mã sinh viên không đủ 10 số hoặc chứa ký tự không hợp lệ. Ví dụ: 2251172557", true, 0);
             studentIdInput.classList.add('border-red-500');
             return false;
         }
@@ -427,9 +488,10 @@ function initDangKyPage() {
         const enteredCode = verificationCodeInput.value.trim();
 
         if (!enteredCode) {
-            verificationError.textContent = 'Vui lòng nhập mã xác nhận.';
+            verificationError.textContent = 'Vui lòng nhập mã xác nhận đã được gửi về email.';
             verificationError.classList.remove('hidden');
             verificationCodeInput.classList.add('border-red-500');
+            verificationEnvelopeIcon.classList.add('error');
             return;
         }
 
@@ -437,16 +499,27 @@ function initDangKyPage() {
             verificationError.textContent = 'Mã xác nhận không hợp lệ.';
             verificationError.classList.remove('hidden');
             verificationCodeInput.classList.add('border-red-500');
+            verificationEnvelopeIcon.classList.add('error');
             return;
         }
 
         // Correct code
         emailVerificationModal.classList.add('hidden');
         simulatedCodeDisplay.classList.add('hidden');
+        verificationCodeInput.classList.remove('border-red-500');
+        verificationEnvelopeIcon.classList.remove('error');
+        verificationError.classList.add('hidden');
         saveRegistrationData();
         successModal.classList.remove('hidden');
         internshipForm.reset();
         handleFacilityStatusChange();
+    });
+
+    // Khi người dùng nhập lại, bỏ trạng thái lỗi
+    verificationCodeInput.addEventListener('input', () => {
+        verificationCodeInput.classList.remove('border-red-500');
+        verificationEnvelopeIcon.classList.remove('error');
+        verificationError.classList.add('hidden');
     });
 
     // Step 4: Final Actions from Success Modal

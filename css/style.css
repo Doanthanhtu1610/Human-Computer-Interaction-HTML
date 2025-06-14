@@ -363,12 +363,43 @@ input[type="date"].date-placeholder:valid::before {
     /* gray-300 */
 }
 
+/* --- Email Verification Modal --- */
+#email-verification-modal .p-6 {
+    text-align: center;
+}
+
+#simulated-code-display {
+    text-align: center;
+}
+
+#verification-code-input {
+    padding-left: 2.5rem !important;
+}
+
+#verification-envelope-icon {
+    font-size: 1.1rem;
+    color: #9ca3af;
+    transition: color 0.2s;
+}
+
 #verification-code-input.border-red-500 {
-    border-color: #ef4444;
+    border-color: #ef4444 !important;
 }
 
 #verification-code-input.border-red-500:focus {
     box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
+}
+
+#verification-code-input.border-red-500 ~ #verification-envelope-icon,
+#verification-envelope-icon.error {
+    color: #ef4444 !important;
+}
+
+#verification-error {
+    font-size: 0.85rem;
+    text-align: left;
+    margin-left: 2px;
+    margin-bottom: 0.5rem;
 }
 
 .success-icon-container {
