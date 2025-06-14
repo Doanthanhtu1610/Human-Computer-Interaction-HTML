@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- NEW: USER MENU AND LOGOUT FUNCTIONALITY ---
+// --- USER MENU AND LOGOUT FUNCTIONALITY ---
 function initUserMenu() {
     const menuButton = document.getElementById('user-menu-button');
     const menu = document.getElementById('user-menu');
@@ -103,7 +103,11 @@ function initLoginPage() {
         const password = loginForm.password.value;
         let role = null;
 
-        if (username === 'teacher@example.com' && password === 'password123') {
+        // *** START: PHẦN ĐƯỢC THAY ĐỔI ***
+        // Thêm kiểm tra cho vai trò 'admin'
+        if (username === 'admin' && password === 'password123') {
+            role = 'admin';
+        } else if (username === 'teacher@example.com' && password === 'password123') {
             role = 'lecturer';
         } else if (username === 'student@example.com' && password === 'password123') {
             role = 'student';
@@ -117,13 +121,19 @@ function initLoginPage() {
                 username,
                 role
             }));
+            
+            // Thêm chuyển hướng cho vai trò 'admin'
             setTimeout(() => {
-                if (role === 'lecturer') {
-                    window.location.href = 'dangky-thuctap-gv.html';
-                } else {
+                if (role === 'admin') {
+                    window.location.href = 'admin.html'; // Chuyển hướng admin đến trang admin.html
+                } else if (role === 'lecturer') {
+                    window.location.href = 'teacher.html';
+                } else { // role === 'student'
                     window.location.href = 'indexStudent.html';
                 }
             }, 1000);
+        // *** END: PHẦN ĐƯỢC THAY ĐỔI ***
+        
         } else {
             loginMessage.textContent = 'Sai email hoặc mật khẩu!';
             loginMessage.classList.add('text-red-600');
@@ -140,7 +150,7 @@ function initLoginPage() {
 
 // --- INTERNSHIP REGISTRATION PAGE SCRIPT (dangky.html) ---
 function initDangKyPage() {
-    // ... (toàn bộ nội dung hàm initDangKyPage giữ nguyên như trước)
+    // ... (nội dung hàm này giữ nguyên, không thay đổi)
     const internshipForm = document.getElementById('internship-form');
     if (!internshipForm) return;
 
@@ -488,7 +498,7 @@ function initDangKyPage() {
 
 // --- REGISTRATION HISTORY PAGE SCRIPT (lichsu.html) ---
 function initLichSuPage() {
-    // ... (toàn bộ nội dung hàm initLichSuPage giữ nguyên như trước)
+    // ... (nội dung hàm này giữ nguyên, không thay đổi)
     const loading = document.getElementById('history-loading');
     const tableContainer = document.getElementById('history-table-container');
     const empty = document.getElementById('history-empty');
