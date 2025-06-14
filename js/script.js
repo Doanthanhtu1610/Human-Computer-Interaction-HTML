@@ -31,12 +31,11 @@ function hideFieldMessage(element) {
 document.addEventListener('DOMContentLoaded', () => {
     const pathname = window.location.pathname.split('/').pop();
 
-    // Khởi tạo menu người dùng trên các trang có header
     if (pathname !== 'login.html') {
         initUserMenu();
+        initSidebar();
     }
 
-    // Khởi tạo logic riêng cho từng trang
     if (pathname === 'login.html') {
         initLoginPage();
     } else if (pathname === 'dangky.html') {
@@ -46,42 +45,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// --- NEW: USER MENU AND LOGOUT FUNCTIONALITY ---
+
+// --- SIDEBAR MENU LOGIC ---
+function initSidebar() {
+    const toggleButton = document.getElementById('nav-internship-toggle');
+    const submenu = document.getElementById('nav-internship-submenu');
+    const arrow = document.getElementById('nav-internship-arrow');
+    const currentPage = window.location.pathname.split('/').pop();
+
+    const navLinks = {
+        home: document.getElementById('nav-home'),
+        register: document.getElementById('nav-register'),
+        history: document.getElementById('nav-history')
+    };
+
+    if (currentPage === 'dangky.html' || currentPage === 'lichsu.html') {
+        submenu.classList.remove('hidden');
+        arrow.classList.add('rotate-180');
+        if (currentPage === 'dangky.html') {
+            navLinks.register.classList.add('bg-blue-700', 'text-white');
+        } else {
+            navLinks.history.classList.add('bg-blue-700', 'text-white');
+        }
+    } else if (currentPage === 'indexStudent.html') {
+        navLinks.home.classList.add('bg-blue-700', 'text-white');
+    }
+
+    toggleButton.addEventListener('click', () => {
+        submenu.classList.toggle('hidden');
+        arrow.classList.toggle('rotate-180');
+    });
+}
+
+
+// --- USER MENU AND LOGOUT FUNCTIONALITY ---
 function initUserMenu() {
     const menuButton = document.getElementById('user-menu-button');
     const menu = document.getElementById('user-menu');
     const logoutButton = document.getElementById('logout-button');
 
-    // Nếu không tìm thấy các thành phần này thì thoát (ví dụ: trên trang login)
-    if (!menuButton || !menu || !logoutButton) {
-        return;
-    }
+    if (!menuButton || !menu || !logoutButton) return;
 
-    // Bấm vào avatar để hiện/ẩn menu
     menuButton.addEventListener('click', (event) => {
-        event.stopPropagation(); // Ngăn sự kiện click lan ra window
+        event.stopPropagation();
         menu.classList.toggle('hidden');
     });
 
-    // Bấm nút đăng xuất
     logoutButton.addEventListener('click', (e) => {
         e.preventDefault();
-        console.log("Đăng xuất...");
-
-        // Xóa dữ liệu người dùng và lịch sử đăng ký khỏi localStorage
         localStorage.removeItem('tluUser');
         localStorage.removeItem('thuyloiInternshipRegistrations');
-
-        // Chuyển hướng về trang đăng nhập
         window.location.href = 'login.html';
     });
 
-    // Bấm ra ngoài để đóng menu
     window.addEventListener('click', (e) => {
-        if (!menu.classList.contains('hidden')) {
-            if (!menuButton.contains(e.target)) {
-                menu.classList.add('hidden');
-            }
+        if (!menu.classList.contains('hidden') && !menuButton.contains(e.target)) {
+            menu.classList.add('hidden');
         }
     });
 }
@@ -90,39 +109,30 @@ function initUserMenu() {
 // --- LOGIN PAGE SCRIPT (login.html) ---
 function initLoginPage() {
     const loginForm = document.getElementById('login-form');
-    const loginMessage = document.getElementById('login-message');
-
     if (!loginForm) return;
 
     document.body.classList.add('login-page');
 
     loginForm.addEventListener('submit', function (e) {
         e.preventDefault();
-
         const username = loginForm.username.value.trim();
         const password = loginForm.password.value;
         let role = null;
 
-        if (username === 'teacher@example.com' && password === 'password123') {
-            role = 'lecturer';
-        } else if (username === 'student@example.com' && password === 'password123') {
-            role = 'student';
-        }
+        if (username === 'admin' && password === 'password123') role = 'admin';
+        else if (username === 'teacher@example.com' && password === 'password123') role = 'lecturer';
+        else if (username === 'student@example.com' && password === 'password123') role = 'student';
 
+        const loginMessage = document.getElementById('login-message');
         if (role) {
             loginMessage.textContent = 'Đăng nhập thành công! Đang chuyển hướng...';
             loginMessage.classList.remove('text-red-600');
             loginMessage.classList.add('text-green-600');
-            localStorage.setItem('tluUser', JSON.stringify({
-                username,
-                role
-            }));
+            localStorage.setItem('tluUser', JSON.stringify({ username, role }));
             setTimeout(() => {
-                if (role === 'lecturer') {
-                    window.location.href = 'dangky-thuctap-gv.html';
-                } else {
-                    window.location.href = 'indexStudent.html';
-                }
+                if (role === 'admin') window.location.href = 'admin.html';
+                else if (role === 'lecturer') window.location.href = 'teacher.html';
+                else window.location.href = 'indexStudent.html';
             }, 1000);
         } else {
             loginMessage.textContent = 'Sai email hoặc mật khẩu!';
@@ -140,31 +150,46 @@ function initLoginPage() {
 
 // --- INTERNSHIP REGISTRATION PAGE SCRIPT (dangky.html) ---
 function initDangKyPage() {
-    // ... (toàn bộ nội dung hàm initDangKyPage giữ nguyên như trước)
     const internshipForm = document.getElementById('internship-form');
     if (!internshipForm) return;
 
-    const emailInput = document.getElementById('email');
+    // --- Get Elements ---
     const studentIdInput = document.getElementById('student-id');
     const fullNameInput = document.getElementById('full-name');
     const phoneNumberInput = document.getElementById('phone-number');
     const addressInput = document.getElementById('address');
-    const facilityNameInput = document.getElementById('facility-name');
-    const startDateInput = document.getElementById('start-date');
-    const endDateInput = document.getElementById('end-date');
     const hasFacilityRadio = document.getElementById('has-facility');
     const noFacilityRadio = document.getElementById('no-facility');
     const internshipPositionInput = document.getElementById('internship-position');
-    const sendCodeButton = document.getElementById('send-verification-code');
-    const verificationCodeInput = document.getElementById('verification-code');
+    const internshipPositionLabel = document.getElementById('internship-position-label');
+
+    // Modals
+    const confirmModal = document.getElementById('confirm-modal');
+    const emailVerificationModal = document.getElementById('email-verification-modal');
+    const successModal = document.getElementById('success-modal');
+
+    // Modal Buttons
     const openConfirmModalButton = document.getElementById('open-confirm-modal');
     const cancelConfirmButton = document.getElementById('cancel-confirm');
     const acceptConfirmButton = document.getElementById('accept-confirm');
-    const confirmModal = document.getElementById('confirm-modal');
+    const closeVerificationModal = document.getElementById('close-verification-modal');
+    const submitVerificationCodeButton = document.getElementById('submit-verification-code');
+    const closeSuccessModal = document.getElementById('close-success-modal');
+    const goToHistoryButton = document.getElementById('go-to-history-button');
+
+    // Modal Content
+    const verificationEmail = document.getElementById('verification-email');
+    const verificationCodeInput = document.getElementById('verification-code-input');
+    const verificationError = document.getElementById('verification-error');
+    const simulatedCodeDisplay = document.getElementById('simulated-code-display'); // Lấy element mới
+
+    // Conditional elements
+    const conditionalFields = document.getElementById('conditional-fields');
+    const startDateInput = document.getElementById('start-date');
+    const endDateInput = document.getElementById('end-date');
+    const facilityNameInput = document.getElementById('facility-name');
 
     // Message elements
-    const emailVerificationMessage = document.getElementById('email-verification-message');
-    const codeVerificationMessage = document.getElementById('code-verification-message');
     const studentIdMessage = document.getElementById('student-id-message');
     const phoneNumberMessage = document.getElementById('phone-number-message');
     const addressMessage = document.getElementById('address-message');
@@ -172,10 +197,8 @@ function initDangKyPage() {
     const facilityMessage = document.getElementById('facility-message');
     const internshipPositionMessage = document.getElementById('internship-position-message');
 
+    // --- State & Simulated Data ---
     let generatedCode = null;
-    let emailVerifiedByCode = false;
-
-    // Dữ liệu giả lập
     const SIMULATED_EXISTING_STUDENT_IDS = ["2251172557", "1234567890", "0987654321"];
     const STUDENT_ID_TO_NAME = {
         "2251172557": "Hoàng Quang Vinh",
@@ -183,46 +206,21 @@ function initDangKyPage() {
         "0987654321": "Trần Thị B"
     };
 
-    fullNameInput.readOnly = true;
-
-    // --- Functions ---
+    // --- Functions (No changes in these sub-functions) ---
     function handleFacilityStatusChange() {
-        const startDateContainer = startDateInput.closest('div.relative').parentNode;
-        const endDateContainer = endDateInput.closest('div.relative').parentNode;
-        const facilityInputGroup = document.getElementById('facility-input-group');
-        const internshipPositionGroup = document.getElementById('internship-position-group');
-        const internshipPositionLabel = document.getElementById('internship-position-label');
-        const startDateRequiredIndicator = document.getElementById('start-date-required-indicator');
-
         if (hasFacilityRadio.checked) {
-            facilityInputGroup.style.display = '';
-            internshipPositionGroup.style.display = '';
+            conditionalFields.classList.remove('hidden');
             internshipPositionLabel.textContent = 'Vị trí thực tập';
-            internshipPositionInput.placeholder = 'Nhập vị trí thực tập tại cơ sở...';
-            startDateRequiredIndicator.classList.remove('hidden');
-            startDateContainer.style.display = '';
-            endDateContainer.style.display = '';
-            startDateInput.removeAttribute('disabled');
-            startDateInput.classList.remove('bg-gray-100');
+            internshipPositionInput.placeholder = 'Nhập vị trí thực tập...';
         } else {
-            facilityInputGroup.style.display = 'none';
-            internshipPositionGroup.style.display = '';
+            conditionalFields.classList.add('hidden');
             internshipPositionLabel.textContent = 'Vị trí thực tập mong muốn';
             internshipPositionInput.placeholder = 'Nhập vị trí thực tập mong muốn...';
-            facilityNameInput.value = '';
-            hideFieldMessage(facilityMessage);
-            facilityNameInput.classList.remove('border-red-500');
-            startDateRequiredIndicator.classList.add('hidden');
-            startDateContainer.style.display = 'none';
-            endDateContainer.style.display = 'none';
-            startDateInput.setAttribute('disabled', 'disabled');
             startDateInput.value = '';
-            startDateInput.type = 'text';
-            startDateInput.classList.add('bg-gray-100');
-            hideFieldMessage(startDateMessage);
-            startDateInput.classList.remove('border-red-500');
             endDateInput.value = '';
-            endDateInput.type = 'text';
+            facilityNameInput.value = '';
+            hideFieldMessage(startDateMessage);
+            hideFieldMessage(facilityMessage);
         }
     }
 
@@ -231,7 +229,6 @@ function initDangKyPage() {
         studentIdInput.classList.remove('border-red-500');
         hideFieldMessage(studentIdMessage);
         fullNameInput.value = '';
-
         if (!idValue) {
             showFieldMessage(studentIdMessage, "Mã sinh viên không được bỏ trống.", true, 0);
             studentIdInput.classList.add('border-red-500');
@@ -270,7 +267,7 @@ function initDangKyPage() {
         }
         return true;
     }
-    
+
     function validateRequiredField(input, msgEl, msg) {
         input.classList.remove('border-red-500');
         hideFieldMessage(msgEl);
@@ -287,18 +284,13 @@ function initDangKyPage() {
         startDateInput.classList.remove('border-red-500');
         endDateInput.value = '';
         endDateInput.type = 'text';
-
-        if (startDateInput.disabled || !startDateInput.value.trim()) {
-            return true;
-        }
-
-        const selectedDate = new Date(startDateInput.value);
+        if (!startDateInput.value.trim()) return true;
+        const selectedDate = new Date(startDateInput.value.split('/').reverse().join('-'));
         if (isNaN(selectedDate.getTime())) {
             showFieldMessage(startDateMessage, 'Ngày không hợp lệ.', true, 0);
             startDateInput.classList.add('border-red-500');
             return false;
         }
-
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         if (selectedDate < today) {
@@ -306,148 +298,37 @@ function initDangKyPage() {
             startDateInput.classList.add('border-red-500');
             return false;
         }
-
         const calculatedEndDate = new Date(selectedDate);
         calculatedEndDate.setDate(selectedDate.getDate() + 90);
-        endDateInput.value = calculatedEndDate.toISOString().split('T')[0];
-        endDateInput.type = 'date';
+        endDateInput.value = calculatedEndDate.toLocaleDateString('en-GB').replace(/\//g, '/');
         return true;
     }
-    
+
     function validateForm(showMessages = true) {
         let isValid = true;
         let firstInvalidField = null;
-
         const setInvalid = (field) => {
             if (!firstInvalidField) firstInvalidField = field;
             isValid = false;
         };
-
-        // Validate Email
-        hideFieldMessage(emailVerificationMessage);
-        emailInput.classList.remove('border-red-500');
-        if (!emailInput.value.trim()) {
-            if (showMessages) showFieldMessage(emailVerificationMessage, 'Email không được bỏ trống.', true, 0);
-            emailInput.classList.add('border-red-500');
-            setInvalid(emailInput);
-        } else if (!/^\d{10}@e\.tlu\.edu\.vn$/.test(emailInput.value.trim())) {
-            if (showMessages) showFieldMessage(emailVerificationMessage, 'Email phải có định dạng 10 số + @e.tlu.edu.vn.', true, 0);
-            emailInput.classList.add('border-red-500');
-            setInvalid(emailInput);
-        }
-
-        // Validate Verification Code
-        hideFieldMessage(codeVerificationMessage);
-        verificationCodeInput.classList.remove('border-red-500');
-        if (!generatedCode) {
-            if (showMessages) showFieldMessage(codeVerificationMessage, 'Vui lòng nhấn "Gửi mã" để nhận mã xác nhận.', true, 0);
-            setInvalid(verificationCodeInput);
-        } else if (!verificationCodeInput.value.trim()) {
-            if (showMessages) showFieldMessage(codeVerificationMessage, 'Mã xác nhận không được bỏ trống.', true, 0);
-            verificationCodeInput.classList.add('border-red-500');
-            setInvalid(verificationCodeInput);
-        } else if (verificationCodeInput.value.trim() !== generatedCode) {
-            if (showMessages) showFieldMessage(codeVerificationMessage, 'Mã xác nhận không đúng.', true, 0);
-            verificationCodeInput.classList.add('border-red-500');
-            setInvalid(verificationCodeInput);
-            emailVerifiedByCode = false;
-        } else {
-            emailVerifiedByCode = true;
-        }
-        
-        // Other fields
         if (!validateStudentId()) setInvalid(studentIdInput);
         if (!validatePhoneNumber()) setInvalid(phoneNumberInput);
         if (!validateRequiredField(addressInput, addressMessage, "Địa chỉ không được bỏ trống.")) setInvalid(addressInput);
-
-        // Conditional fields
+        if (!validateRequiredField(internshipPositionInput, internshipPositionMessage, internshipPositionLabel.textContent + ' không được bỏ trống.')) setInvalid(internshipPositionInput);
         if (hasFacilityRadio.checked) {
-            if (!startDateInput.value.trim()) {
-                if(showMessages) showFieldMessage(startDateMessage, 'Ngày bắt đầu không được bỏ trống.', true, 0);
-                startDateInput.classList.add('border-red-500');
-                setInvalid(startDateInput);
-            } else if (!validateStartDate()) {
-                setInvalid(startDateInput);
-            }
+            if (!validateRequiredField(startDateInput, startDateMessage, "Ngày bắt đầu không được bỏ trống.")) setInvalid(startDateInput);
+            else if (!validateStartDate()) setInvalid(startDateInput);
             if (!validateRequiredField(facilityNameInput, facilityMessage, "Tên cơ sở thực tập không được bỏ trống.")) setInvalid(facilityNameInput);
         }
-        
-        // Internship position is always required
-         if (!validateRequiredField(internshipPositionInput, internshipPositionMessage, document.getElementById('internship-position-label').textContent + ' không được bỏ trống.')) setInvalid(internshipPositionInput);
-
-
         if (firstInvalidField && showMessages) {
             firstInvalidField.focus();
         }
-
         return isValid;
     }
 
-    // --- Event Listeners ---
-    sendCodeButton.addEventListener('click', () => {
-        const emailValue = emailInput.value.trim();
-        const emailPattern = /^\d{10}@e\.tlu\.edu\.vn$/;
-        emailVerifiedByCode = false;
-        hideFieldMessage(emailVerificationMessage);
-        emailInput.classList.remove('border-red-500');
-
-        if (!emailPattern.test(emailValue)) {
-            showFieldMessage(emailVerificationMessage, 'Email phải đúng định dạng: msv@e.tlu.edu.vn.', true, 0);
-            emailInput.classList.add('border-red-500');
-            emailInput.focus();
-            return;
-        }
-
-        generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
-        console.log('Mã xác nhận (để test):', generatedCode);
-        showFieldMessage(emailVerificationMessage, `Mã xác nhận (giả lập) đã được gửi: ${generatedCode}.`, false, 7000);
-        verificationCodeInput.disabled = false;
-        verificationCodeInput.focus();
-    });
-
-    studentIdInput.addEventListener('blur', validateStudentId);
-    phoneNumberInput.addEventListener('blur', validatePhoneNumber);
-    addressInput.addEventListener('blur', () => validateRequiredField(addressInput, addressMessage, "Địa chỉ không được bỏ trống."));
-    internshipPositionInput.addEventListener('blur', () => validateRequiredField(internshipPositionInput, internshipPositionMessage, document.getElementById('internship-position-label').textContent + ' không được bỏ trống.'));
-
-    noFacilityRadio.addEventListener('change', handleFacilityStatusChange);
-    hasFacilityRadio.addEventListener('change', handleFacilityStatusChange);
-
-    startDateInput.addEventListener('focus', () => { if (!startDateInput.disabled) startDateInput.type = 'date'; });
-    startDateInput.addEventListener('blur', () => { if (!startDateInput.value && !startDateInput.disabled) startDateInput.type = 'text'; validateStartDate(); });
-    startDateInput.addEventListener('change', validateStartDate);
-    
-    openConfirmModalButton.addEventListener('click', () => {
-        if (!validateForm(true)) {
-             showToast('Vui lòng kiểm tra lại các thông tin đã nhập.', 'error');
-             return;
-        }
-        const confirmInfo = document.getElementById('confirm-info');
-        const facilityStatus = hasFacilityRadio.checked ? 'yes' : 'no';
-        confirmInfo.innerHTML = `
-            <div><b>Email:</b> ${emailInput.value.trim()}</div>
-            <div><b>Mã sinh viên:</b> ${studentIdInput.value.trim()}</div>
-            <div><b>Họ và tên:</b> ${fullNameInput.value.trim()}</div>
-            <div><b>Số điện thoại:</b> ${phoneNumberInput.value.trim()}</div>
-            <div><b>Địa chỉ:</b> ${addressInput.value.trim()}</div>
-            <div><b>Tình trạng cơ sở:</b> ${facilityStatus === 'yes' ? 'Đã có' : 'Chưa có'}</div>
-            ${facilityStatus === 'yes' ? `<div><b>Tên cơ sở:</b> ${facilityNameInput.value.trim()}</div>` : ''}
-            <div><b>Ngày bắt đầu:</b> ${startDateInput.value || '-'}</div>
-            <div><b>Ngày kết thúc:</b> ${endDateInput.value || '-'}</div>
-             <div><b>Vị trí:</b> ${internshipPositionInput.value.trim()}</div>
-        `;
-        confirmModal.classList.remove('hidden');
-    });
-    
-    cancelConfirmButton.addEventListener('click', () => {
-        confirmModal.classList.add('hidden');
-    });
-
-    acceptConfirmButton.addEventListener('click', () => {
-        confirmModal.classList.add('hidden');
+    function saveRegistrationData() {
         const facilityStatus = hasFacilityRadio.checked ? 'yes' : 'no';
         const internshipData = {
-            email: emailInput.value.trim(),
             studentId: studentIdInput.value.trim(),
             fullName: fullNameInput.value.trim(),
             phoneNumber: phoneNumberInput.value.trim(),
@@ -457,68 +338,167 @@ function initDangKyPage() {
             startDate: facilityStatus === 'yes' ? startDateInput.value : null,
             endDate: facilityStatus === 'yes' ? endDateInput.value : null,
             internshipPosition: internshipPositionInput.value.trim(),
-            registrationTimestamp: new Date().toISOString(),
-            expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString()
+            registrationTimestamp: new Date().toISOString()
         };
-
         try {
             let history = JSON.parse(localStorage.getItem('thuyloiInternshipRegistrations')) || [];
             history.unshift(internshipData);
             localStorage.setItem('thuyloiInternshipRegistrations', JSON.stringify(history));
-
-            showToast('Đăng ký thực tập thành công!', 'success');
-            internshipForm.reset();
-            verificationCodeInput.disabled = true;
-            generatedCode = null;
-            emailVerifiedByCode = false;
-            handleFacilityStatusChange(); // Reset form state
-            document.querySelectorAll('.form-message').forEach(el => hideFieldMessage(el));
-            document.querySelectorAll('.border-red-500').forEach(el => el.classList.remove('border-red-500'));
-            emailInput.focus();
         } catch (error) {
             console.error("Lỗi khi lưu vào localStorage: ", error);
             showToast('Đã xảy ra lỗi khi lưu đăng ký.', 'error');
         }
+    }
+
+    // --- Event Listeners (Main changes are here) ---
+    studentIdInput.addEventListener('blur', validateStudentId);
+    phoneNumberInput.addEventListener('blur', validatePhoneNumber);
+    addressInput.addEventListener('blur', () => validateRequiredField(addressInput, addressMessage, "Địa chỉ không được bỏ trống."));
+    internshipPositionInput.addEventListener('blur', () => validateRequiredField(internshipPositionInput, internshipPositionMessage, internshipPositionLabel.textContent + ' không được bỏ trống.'));
+    noFacilityRadio.addEventListener('change', handleFacilityStatusChange);
+    hasFacilityRadio.addEventListener('change', handleFacilityStatusChange);
+    startDateInput.addEventListener('focus', () => startDateInput.type = 'date');
+    startDateInput.addEventListener('blur', () => {
+        startDateInput.type = 'text';
+        if (startDateInput.value) {
+            try { startDateInput.value = new Date(startDateInput.value).toLocaleDateString('en-GB'); } catch (e) { }
+        }
+        validateStartDate();
     });
 
-    // Initial state setup
+    // Step 1: Open Confirmation Modal
+    openConfirmModalButton.addEventListener('click', () => {
+        if (!validateForm(true)) {
+            showToast('Vui lòng kiểm tra lại các thông tin đã nhập.', 'error');
+            return;
+        }
+        const confirmInfo = document.getElementById('confirm-info');
+        let facilityInfoHtml = '';
+        if (hasFacilityRadio.checked) {
+            facilityInfoHtml = `
+                <div><b>Ngày bắt đầu:</b> ${startDateInput.value}</div>
+                <div><b>Ngày kết thúc:</b> ${endDateInput.value}</div>
+                <div><b>Tên cơ sở:</b> ${facilityNameInput.value.trim()}</div>
+            `;
+        }
+        confirmInfo.innerHTML = `
+            <div><b>Mã sinh viên:</b> ${studentIdInput.value.trim()}</div>
+            <div><b>Họ và tên:</b> ${fullNameInput.value.trim()}</div>
+            <div><b>Số điện thoại:</b> ${phoneNumberInput.value.trim()}</div>
+            <div><b>Địa chỉ liên hệ:</b> ${addressInput.value.trim()}</div>
+            <div><b>Tình trạng cơ sở:</b> ${hasFacilityRadio.checked ? 'Đã có' : 'Chưa có'}</div>
+            ${facilityInfoHtml}
+            <div><b>${internshipPositionLabel.textContent}:</b> ${internshipPositionInput.value.trim()}</div>
+        `;
+        confirmModal.classList.remove('hidden');
+    });
+
+    cancelConfirmButton.addEventListener('click', () => confirmModal.classList.add('hidden'));
+
+    // Step 2: Open Email Verification Modal
+    acceptConfirmButton.addEventListener('click', () => {
+        confirmModal.classList.add('hidden');
+        generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+        // **MỚI: Hiển thị mã giả lập**
+        simulatedCodeDisplay.textContent = `(Mã giả lập để test: ${generatedCode})`;
+        simulatedCodeDisplay.classList.remove('hidden');
+
+        const studentEmail = studentIdInput.value.trim() + "@e.tlu.edu.vn";
+        verificationEmail.textContent = studentEmail;
+
+        verificationCodeInput.value = '';
+        verificationCodeInput.classList.remove('border-red-500');
+        hideFieldMessage(verificationError);
+
+        emailVerificationModal.classList.remove('hidden');
+        verificationCodeInput.focus();
+    });
+
+    // **MỚI: Thay đổi hành vi nút X**
+    closeVerificationModal.addEventListener('click', () => {
+        emailVerificationModal.classList.add('hidden');
+        simulatedCodeDisplay.classList.add('hidden'); // Ẩn mã giả lập khi đóng
+        confirmModal.classList.remove('hidden'); // Mở lại modal xác nhận thông tin
+    });
+
+    // Step 3: Verify Code and Show Success
+    submitVerificationCodeButton.addEventListener('click', () => {
+        const enteredCode = verificationCodeInput.value.trim();
+
+        if (!enteredCode) {
+            verificationError.textContent = 'Vui lòng nhập mã xác nhận.';
+            verificationError.classList.remove('hidden');
+            verificationCodeInput.classList.add('border-red-500');
+            return;
+        }
+
+        if (enteredCode !== generatedCode) {
+            verificationError.textContent = 'Mã xác nhận không hợp lệ.';
+            verificationError.classList.remove('hidden');
+            verificationCodeInput.classList.add('border-red-500');
+            return;
+        }
+
+        // Correct code
+        emailVerificationModal.classList.add('hidden');
+        simulatedCodeDisplay.classList.add('hidden');
+        saveRegistrationData();
+        successModal.classList.remove('hidden');
+        internshipForm.reset();
+        handleFacilityStatusChange();
+    });
+
+    // Step 4: Final Actions from Success Modal
+    closeSuccessModal.addEventListener('click', () => {
+        successModal.classList.add('hidden');
+    });
+
+    goToHistoryButton.addEventListener('click', () => {
+        window.location.href = 'lichsu.html';
+    });
+
+    // --- Initial State Setup ---
     handleFacilityStatusChange();
 }
 
-
 // --- REGISTRATION HISTORY PAGE SCRIPT (lichsu.html) ---
 function initLichSuPage() {
-    // ... (toàn bộ nội dung hàm initLichSuPage giữ nguyên như trước)
+    // 1. Lấy tất cả các phần tử cần thiết từ trang HTML
     const loading = document.getElementById('history-loading');
     const tableContainer = document.getElementById('history-table-container');
     const empty = document.getElementById('history-empty');
 
-    if (!loading) return;
-
-    let history = [];
-    try {
-        history = JSON.parse(localStorage.getItem('thuyloiInternshipRegistrations')) || [];
-    } catch (e) {
-        console.error("Error parsing history from localStorage:", e);
-        history = [];
+    // 2. Kiểm tra xem các phần tử có tồn tại không
+    if (!loading || !tableContainer || !empty) {
+        console.error("Lỗi: Một hoặc nhiều phần tử của trang lịch sử không được tìm thấy.");
+        return;
     }
 
-    // Filter out expired entries (for demo)
-    const now = new Date();
-    const originalLength = history.length;
-    history = history.filter(d => !d.expiresAt || new Date(d.expiresAt) > now);
-    if (history.length < originalLength) {
-        localStorage.setItem('thuyloiInternshipRegistrations', JSON.stringify(history));
-    }
-
+    // 3. Ẩn thông báo "Đang tải" ngay lập tức để tránh bị kẹt
     loading.style.display = 'none';
 
-    if (!history.length) {
+    // 4. Đọc và xử lý dữ liệu từ localStorage một cách an toàn
+    let history = [];
+    try {
+        const storedData = localStorage.getItem('thuyloiInternshipRegistrations');
+        if (storedData) {
+            history = JSON.parse(storedData);
+        }
+    } catch (e) {
+        console.error("Lỗi khi đọc dữ liệu từ localStorage:", e);
+        history = []; // Đặt lại thành mảng rỗng nếu có lỗi
+    }
+
+    // 5. Kiểm tra xem có lịch sử đăng ký nào không
+    if (!history || history.length === 0) {
+        // Nếu không có, hiển thị thông báo "Chưa có đăng ký nào"
         empty.style.display = '';
         tableContainer.style.display = 'none';
         return;
     }
 
+    // Nếu có lịch sử, tạo và hiển thị bảng dữ liệu
     let html = `<div class='w-full' style='overflow-x: auto;'><table class='table' style='table-layout:auto; width: 100%;'><thead><tr>
         <th>Mã SV</th>
         <th>Họ tên</th>
