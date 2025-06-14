@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - Đại học Thủy Lợi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="flex h-screen">
+
+    <aside class="sidebar w-96 min-h-screen p-5 flex flex-col">
+        <div class="flex items-center mb-10">
+            <img src="https://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" alt="Logo Đại học Thủy Lợi"
+                class="h-16 w-16 mr-4 flex-shrink-0 object-contain">
+            <div>
+                <h1 class="university-name-primary">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+                <p class="university-name-secondary mt-1">THUYLOI UNIVERSITY</p>
+            </div>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="mb-2.5">
+                    <a href="indexStudent.html"
+                        class="active flex items-center py-3 px-3.5 rounded-md bg-blue-700 text-white text-sm">
+                        <i class="fas fa-home w-5 mr-3.5"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="mb-2.5">
+                    <a href="dangky.html" class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm">
+                        <i class="fas fa-clipboard-list w-5 mr-3.5"></i>
+                        Đăng ký thực tập
+                    </a>
+                </li>
+                <li class="mb-2.5">
+                    <a href="lichsu.html" class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm">
+                        <i class="fas fa-history w-5 mr-3.5"></i>
+                        Lịch sử đăng ký
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col">
+        <header class="bg-white shadow-sm p-4 flex justify-end items-center">
+            <div class="relative">
+                <div id="user-menu-button" class="flex items-center cursor-pointer">
+                    <img src="https://placehold.co/36x36/cccccc/1f2937?text=HV" alt="Avatar Hoàng Quang Vinh"
+                        class="h-9 w-9 rounded-full mr-2">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700">Hoàng Quang Vinh</p>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs text-gray-400 ml-2"></i>
+                </div>
+
+                <div id="user-menu"
+                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
+                    <a href="#" id="logout-button"
+                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 p-6 md:p-8 lg:p-10 overflow-y-auto">
+            <section class="mb-10 p-6 bg-white rounded-xl shadow-lg">
+                <h2 class="text-xl font-bold text-gray-800 mb-3">Chào mừng quay trở lại, Vinh.</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    Đây là những gì đang diễn ra với chương trình thực tập của bạn.
+                </p>
+            </section>
+
+            <section class="mb-10">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-6">Những Con Số Nổi Bật</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="stat-card">
+                        <div class="flex items-center text-blue-600 mb-2">
+                            <i class="fas fa-users text-3xl mr-3"></i>
+                            <span class="text-4xl font-bold">5,000+</span>
+                        </div>
+                        <p class="text-gray-600 font-medium">Số sinh viên đang quản lý</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="flex items-center text-green-600 mb-2">
+                            <i class="fas fa-graduation-cap text-3xl mr-3"></i>
+                            <span class="text-4xl font-bold">1000+</span>
+                        </div>
+                        <p class="text-gray-600 font-medium">Số doanh nghiệp đang quản lý</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="flex items-center text-purple-600 mb-2">
+                            <i class="fas fa-flask text-3xl mr-3"></i>
+                            <span class="text-4xl font-bold">4500+</span>
+                        </div>
+                        <p class="text-gray-600 font-medium">Sinh viên đang thực tập</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="flex items-center text-red-600 mb-2">
+                            <i class="fas fa-building-columns text-3xl mr-3"></i>
+                            <span class="text-4xl font-bold">65+</span>
+                        </div>
+                        <p class="text-gray-600 font-medium">Năm xây dựng & phát triển</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-10">
+                <h3 class="text-2xl font-semibold text-gray-700 mb-6">Khám Phá Thêm</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-bullhorn quick-link-icon"></i>
+                        <h4 class="font-semibold text-lg mb-1">Tin tức & Sự kiện</h4>
+                        <p class="text-sm">Cập nhật thông tin mới nhất.</p>
+                    </a>
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-book-open quick-link-icon"></i>
+                        <h4 class="font-semibold text-lg mb-1">Chương trình Đào tạo</h4>
+                        <p class="text-sm">Tìm hiểu các ngành học.</p>
+                    </a>
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-user-plus quick-link-icon"></i>
+                        <h4 class="font-semibold text-lg mb-1">Tuyển sinh</h4>
+                        <p class="text-sm">Thông tin cho thí sinh.</p>
+                    </a>
+                    <a href="#" class="quick-link-card">
+                        <i class="fas fa-microscope quick-link-icon"></i>
+                        <h4 class="font-semibold text-lg mb-1">Nghiên cứu Khoa học</h4>
+                        <p class="text-sm">Các đề tài và công bố.</p>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+        <footer class="text-center mt-12 py-6 border-t border-gray-300">
+            <p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi. Mọi quyền được bảo lưu.</p>
+        </footer>
+    </main>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>

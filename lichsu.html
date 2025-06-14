@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử đăng ký thực tập - Đại học Thủy Lợi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body class="flex h-screen">
+    <aside class="sidebar w-96 min-h-screen p-5 flex flex-col">
+        <div class="flex items-center mb-10">
+            <img src="https://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" alt="Logo Đại học Thủy Lợi"
+                class="h-16 w-16 mr-4 flex-shrink-0 object-contain">
+            <div>
+                <h1 class="university-name-primary">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+                <p class="university-name-secondary mt-1">THUYLOI UNIVERSITY</p>
+            </div>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="mb-2.5">
+                    <a href="indexStudent.html"
+                        class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm">
+                        <i class="fas fa-home w-5 mr-3.5"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="mb-2.5">
+                    <a href="dangky.html" class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm">
+                        <i class="fas fa-clipboard-list w-5 mr-3.5"></i> Đăng ký thực tập
+                    </a>
+                </li>
+                <li class="mb-2.5">
+                    <a href="lichsu.html"
+                        class="active flex items-center py-3 px-3.5 rounded-md bg-blue-700 text-white text-sm">
+                        <i class="fas fa-history w-5 mr-3.5"></i> Lịch sử đăng ký
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="flex-1 flex flex-col">
+        <header class="bg-white shadow-sm p-4 flex justify-end items-center">
+            <div class="relative">
+                <div id="user-menu-button" class="flex items-center cursor-pointer">
+                    <img src="https://placehold.co/36x36/cccccc/1f2937?text=HV" alt="Avatar Hoàng Quang Vinh" class="h-9 w-9 rounded-full mr-2">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700">Hoàng Quang Vinh</p>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs text-gray-400 ml-2"></i>
+                </div>
+
+                <div id="user-menu"
+                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
+                    <a href="#" id="logout-button"
+                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="flex-1 p-6 overflow-y-auto bg-gray-50">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Lịch sử đăng ký thực tập</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md w-full mx-auto">
+                <div id="history-loading" class="text-center text-gray-500 py-8">Đang tải dữ liệu...</div>
+                <div id="history-table-container" class="w-full" style="display:none;"></div>
+                <div id="history-empty" class="text-center text-gray-400 py-8" style="display:none;">Chưa có đăng ký
+                    nào.</div>
+            </div>
+        </div>
+        <footer class="text-center mt-8 text-xs text-gray-500">
+            <p>© Đại học Thủy Lợi 2025</p>
+        </footer>
+    </main>
+    <script src="./js/script.js"></script>
+</body>
+
+</html>
