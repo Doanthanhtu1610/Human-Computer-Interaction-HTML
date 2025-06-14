@@ -1,16 +1,13 @@
-/* --- General Body and Font Styles --- */
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: #f8f9fa;
-    /* Default background, can be overridden */
 }
 
-/* Specific background for login page */
 body.login-page {
     background-color: #f0f4f8;
 }
 
-/* --- Sidebar Styles (indexStudent, dangky, lichsu) --- */
 .sidebar {
     background-color: #003366;
     color: #e0e7ff;
@@ -44,7 +41,6 @@ body.login-page {
 }
 
 
-/* --- Form Control Styles (dangky) --- */
 .form-input,
 .form-select,
 .form-textarea {
@@ -134,7 +130,6 @@ input[type="date"].date-placeholder:valid::before {
     margin-top: 0.25rem;
 }
 
-/* --- Button Styles --- */
 .btn-primary {
     background-color: #007bff;
     color: white;
@@ -157,7 +152,6 @@ input[type="date"].date-placeholder:valid::before {
     background-color: #5a6268;
 }
 
-/* --- Toast Notification (dangky) --- */
 .toast {
     position: fixed;
     bottom: 20px;
@@ -179,13 +173,11 @@ input[type="date"].date-placeholder:valid::before {
 
 .toast-success {
     background-color: #10B981;
-    /* Green */
     color: white;
 }
 
 .toast-error {
     background-color: #EF4444;
-    /* Red */
     color: white;
 }
 
@@ -332,4 +324,35 @@ input[type="date"].date-placeholder:valid::before {
 
 .animate-shake {
     animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.modal-header {
+    background-color: #3b82f6; 
+    color: white;
+}
+
+.modal-header button:hover {
+    color: #d1d5db; 
+}
+
+#verification-code-input.border-red-500 {
+    border-color: #ef4444;
+}
+#verification-code-input.border-red-500:focus {
+    box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
+}
+
+.success-icon-container {
+    width: 64px; /* w-16 */
+    height: 64px; /* h-16 */
+    background-color: #dcfce7; /* bg-green-100 */
+    border-radius: 9999px; /* rounded-full */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon-container .fa-check {
+    color: #22c55e; /* text-green-500 */
+    font-size: 2rem; /* text-3xl approx */
 }
