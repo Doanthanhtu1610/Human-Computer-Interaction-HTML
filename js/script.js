@@ -1,4 +1,3 @@
-// --- GLOBAL HELPER FUNCTIONS ---
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toastContainer');
     if (!toast) return;
@@ -27,7 +26,6 @@ function hideFieldMessage(element) {
 }
 
 
-// --- PAGE-SPECIFIC LOGIC ---
 document.addEventListener('DOMContentLoaded', () => {
     const pathname = window.location.pathname.split('/').pop();
 
@@ -46,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// --- SIDEBAR MENU LOGIC ---
+
 function initSidebar() {
     const toggleButton = document.getElementById('nav-internship-toggle');
     const submenu = document.getElementById('nav-internship-submenu');
@@ -78,7 +76,7 @@ function initSidebar() {
 }
 
 
-// --- USER MENU AND LOGOUT FUNCTIONALITY ---
+
 function initUserMenu() {
     const menuButton = document.getElementById('user-menu-button');
     const menu = document.getElementById('user-menu');
@@ -106,7 +104,6 @@ function initUserMenu() {
 }
 
 
-// --- LOGIN PAGE SCRIPT (login.html) ---
 function initLoginPage() {
     const loginForm = document.getElementById('login-form');
     if (!loginForm) return;
@@ -184,6 +181,7 @@ function initDangKyPage() {
     const verificationEnvelopeIcon = document.getElementById('verification-envelope-icon');
     const simulatedCodeDisplay = document.getElementById('simulated-code-display'); // Lấy element mới
 
+
     // Conditional elements
     const conditionalFields = document.getElementById('conditional-fields');
     const startDateInput = document.getElementById('start-date');
@@ -207,6 +205,7 @@ function initDangKyPage() {
         "2251172348", "2251172298", "2251172502", "2251172564", "2251172450", "2251172356", "2251172264", "2251172355", "2251172354",
         "2251172325", "2251172410", "2251172546", "2251172281", "2251172417", "2251172253", "2251172534", "2251172419", "2251172294",
         "2251172474", "2251172530", "2251172523", "2251172510"];
+
     const STUDENT_ID_TO_NAME = {
         "2251172266": "Đinh Quang Đạt",
         "2251172371": "Bùi Khắc Huy",
@@ -378,7 +377,9 @@ function initDangKyPage() {
         if (!validateRequiredField(internshipPositionInput, internshipPositionMessage, internshipPositionLabel.textContent + ' không được bỏ trống.')) setInvalid(internshipPositionInput);
         if (hasFacilityRadio.checked) {
             if (!validateRequiredField(startDateInput, startDateMessage, "Ngày bắt đầu không được bỏ trống.")) setInvalid(startDateInput);
+
             else if (!validateStartDate()) setInvalid(startDateInput);
+
             if (!validateRequiredField(facilityNameInput, facilityMessage, "Tên cơ sở thực tập không được bỏ trống.")) setInvalid(facilityNameInput);
         }
         if (firstInvalidField && showMessages) {
@@ -422,6 +423,7 @@ function initDangKyPage() {
     startDateInput.addEventListener('blur', () => {
         startDateInput.type = 'text';
         if (startDateInput.value) {
+
             try { startDateInput.value = new Date(startDateInput.value).toLocaleDateString('en-GB'); } catch (e) { }
         }
         validateStartDate();
@@ -487,6 +489,7 @@ function initDangKyPage() {
     submitVerificationCodeButton.addEventListener('click', () => {
         const enteredCode = verificationCodeInput.value.trim();
 
+
         if (!enteredCode) {
             verificationError.textContent = 'Vui lòng nhập mã xác nhận đã được gửi về email.';
             verificationError.classList.remove('hidden');
@@ -495,25 +498,31 @@ function initDangKyPage() {
             return;
         }
 
+
         if (enteredCode !== generatedCode) {
             verificationError.textContent = 'Mã xác nhận không hợp lệ.';
             verificationError.classList.remove('hidden');
             verificationCodeInput.classList.add('border-red-500');
+
             verificationEnvelopeIcon.classList.add('error');
+
             return;
         }
 
         // Correct code
         emailVerificationModal.classList.add('hidden');
         simulatedCodeDisplay.classList.add('hidden');
+
         verificationCodeInput.classList.remove('border-red-500');
         verificationEnvelopeIcon.classList.remove('error');
         verificationError.classList.add('hidden');
+
         saveRegistrationData();
         successModal.classList.remove('hidden');
         internshipForm.reset();
         handleFacilityStatusChange();
     });
+
 
     // Khi người dùng nhập lại, bỏ trạng thái lỗi
     verificationCodeInput.addEventListener('input', () => {
@@ -521,6 +530,7 @@ function initDangKyPage() {
         verificationEnvelopeIcon.classList.remove('error');
         verificationError.classList.add('hidden');
     });
+
 
     // Step 4: Final Actions from Success Modal
     closeSuccessModal.addEventListener('click', () => {
