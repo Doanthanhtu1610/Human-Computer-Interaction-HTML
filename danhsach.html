@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Danh sách Sinh viên - Quản lý</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link rel="stylesheet" href="./css/style.css" />
+        <style>
+            .validation-error {
+                color: #ef4444;
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+            }
+            input.invalid {
+                border-color: #ef4444;
+            }
+            .modal-overlay {
+                transition: opacity 0.3s ease;
+            }
+            .modal-container {
+                transition: transform 0.3s ease, opacity 0.3s ease;
+            }
+        </style>
+    </head>
+    <body class="flex h-screen bg-gray-100">
+        <aside class="sidebar w-96 min-h-screen p-5 flex flex-col">
+            <div class="flex items-center mb-10">
+                <img
+                    src="https://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png"
+                    alt="Logo Đại học Thủy Lợi"
+                    class="h-16 w-16 mr-4 flex-shrink-0 object-contain"
+                />
+                <div>
+                    <h1 class="university-name-primary">
+                        TRƯỜNG ĐẠI HỌC THỦY LỢI
+                    </h1>
+                    <p class="university-name-secondary mt-1">
+                        THUYLOI UNIVERSITY
+                    </p>
+                </div>
+            </div>
+            <nav class="flex-grow">
+                <ul>
+                    <li class="mb-2.5">
+                        <a
+                            href="teacher.html"
+                            id="nav-home"
+                            class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500"
+                        >
+                            <i class="fas fa-home w-5 mr-3.5"></i> Trang chủ
+                        </a>
+                    </li>
+                    <li class="mb-2.5">
+                        <button
+                            id="nav-internship-toggle"
+                            class="flex items-center justify-between w-full py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500"
+                        >
+                            <span class="flex items-center">
+                                <i class="fas fa-users w-5 mr-3.5"></i> Quản lý
+                                sinh viên
+                            </span>
+                            <i
+                                class="fas fa-chevron-down text-xs transition-transform duration-300 rotate-180"
+                                id="nav-internship-arrow"
+                            ></i>
+                        </button>
+                        <ul
+                            id="nav-internship-submenu"
+                            class="pl-8 mt-2 space-y-2"
+                        >
+                            <li>
+                                <a
+                                    href="teacher.html#evaluation"
+                                    id="nav-evaluation"
+                                    class="flex items-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm border border-gray-500"
+                                >
+                                    <i class="fas fa-edit w-4 mr-2"></i> Đánh
+                                    giá sinh viên
+                                </a>
+                            </li>
+                            <li>
+                                <a
+                                    href="danhsach.html"
+                                    id="nav-student-list"
+                                    class="flex items-center py-2 px-3 rounded-md text-sm border border-gray-500 bg-blue-700 text-white"
+                                >
+                                    <i class="fas fa-list-ul w-4 mr-2"></i> Danh
+                                    sách sinh viên
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="mb-2.5">
+                        <a
+                            href="tailieu.html"
+                            id="nav-documents"
+                            class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500"
+                        >
+                            <i class="fas fa-upload w-5 mr-3.5"></i> Tải lên tài
+                            liệu
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1 flex flex-col">
+            <header
+                class="bg-white shadow-sm p-4 flex justify-end items-center"
+            >
+                <div class="relative">
+                    <div
+                        id="user-menu-button"
+                        class="flex items-center cursor-pointer"
+                    >
+                        <img
+                            src="https://placehold.co/36x36/E2E8F0/4A5568?text=NH"
+                            alt="Avatar Nguyễn Thị Thu Hương"
+                            class="h-9 w-9 rounded-full mr-2"
+                        />
+                        <div>
+                            <p class="text-sm font-medium text-gray-700">
+                                Nguyễn Thị Thu Hương
+                            </p>
+                            <p class="text-xs text-gray-500">Giảng viên</p>
+                        </div>
+                        <i
+                            class="fas fa-chevron-down text-xs text-gray-400 ml-2"
+                        ></i>
+                    </div>
+                    <div
+                        id="user-menu"
+                        class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5"
+                    >
+                        <a
+                            href="login.html"
+                            id="logout-button"
+                            class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
+                        >
+                            <i
+                                class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"
+                            ></i>
+                            Đăng xuất
+                        </a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="flex-1 p-6 md:p-8 lg:p-10 overflow-y-auto">
+                <div id="page-student-list">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Danh sách sinh viên thực tập
+                        </h2>
+                        <button
+                            id="add-student-button"
+                            class="px-4 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2"
+                        >
+                            <i class="fas fa-plus"></i>Thêm mới
+                        </button>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-sm">
+                        <div
+                            class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4"
+                        >
+                            <div class="relative w-full md:w-auto">
+                                <i
+                                    class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                                ></i>
+                                <input
+                                    type="text"
+                                    placeholder="Tìm kiếm..."
+                                    class="w-full md:w-64 pl-10 pr-4 py-2 border rounded-lg bg-gray-50"
+                                />
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table
+                                class="w-full text-sm text-left text-gray-600"
+                            >
+                                <thead
+                                    class="bg-gray-100 text-xs text-gray-700 uppercase"
+                                >
+                                    <tr>
+                                        <th class="py-3 px-4">STT</th>
+                                        <th class="py-3 px-4">Họ và tên</th>
+                                        <th class="py-3 px-4">Ngày sinh</th>
+                                        <th class="py-3 px-4">Giới tính</th>
+                                        <th class="py-3 px-4">Địa chỉ</th>
+                                        <th class="py-3 px-4">CMND/CCCD</th>
+                                        <th class="py-3 px-4">Doanh nghiệp</th>
+                                        <th class="py-3 px-4">Vị trí</th>
+                                        <th class="py-3 px-4">Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="student-list-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="page-student-form" class="hidden">
+                    <div class="flex items-center gap-4 mb-6">
+                        <button
+                            id="back-to-list-button"
+                            class="h-10 w-10 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition flex items-center justify-center"
+                        >
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h2 class="text-2xl font-bold text-gray-800">
+                            Thông tin sinh viên
+                        </h2>
+                    </div>
+                    <form
+                        id="student-form"
+                        class="bg-white p-6 rounded-lg shadow-sm"
+                    >
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label
+                                    for="name"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Họ và tên
+                                    <span class="text-red-500">*</span></label
+                                ><input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                /><span class="validation-error"></span>
+                            </div>
+                            <div>
+                                <label
+                                    for="dob"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Sinh ngày</label
+                                ><input
+                                    type="date"
+                                    id="dob"
+                                    name="dob"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="address"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Địa chỉ</label
+                                ><input
+                                    type="text"
+                                    id="address"
+                                    name="address"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="gender"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Giới tính</label
+                                ><select
+                                    id="gender"
+                                    name="gender"
+                                    class="w-full mt-1 p-2 border rounded-md bg-white"
+                                >
+                                    <option value="Nam">Nam</option>
+                                    <option value="Nữ">Nữ</option>
+                                    <option value="Khác">Khác</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label
+                                    for="phone"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Số điện thoại</label
+                                ><input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="studentId"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Mã sinh viên
+                                    <span class="text-red-500">*</span></label
+                                ><input
+                                    type="text"
+                                    id="studentId"
+                                    name="studentId"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                /><span class="validation-error"></span>
+                            </div>
+                            <div>
+                                <label
+                                    for="class"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Lớp học</label
+                                ><input
+                                    type="text"
+                                    id="class"
+                                    name="class"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="course"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Khóa</label
+                                ><input
+                                    type="text"
+                                    id="course"
+                                    name="course"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="faculty"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Khoa</label
+                                ><input
+                                    type="text"
+                                    id="faculty"
+                                    name="faculty"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="major"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Ngành</label
+                                ><input
+                                    type="text"
+                                    id="major"
+                                    name="major"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="company"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Công ty thực tập</label
+                                ><input
+                                    type="text"
+                                    id="company"
+                                    name="company"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div>
+                                <label
+                                    for="position"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Vị trí thực tập</label
+                                ><input
+                                    type="text"
+                                    id="position"
+                                    name="position"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                />
+                            </div>
+                            <div class="md:col-span-3">
+                                <label
+                                    for="note"
+                                    class="text-sm font-medium text-gray-700"
+                                    >Ghi chú</label
+                                ><textarea
+                                    id="note"
+                                    name="note"
+                                    rows="4"
+                                    class="w-full mt-1 p-2 border rounded-md"
+                                ></textarea>
+                            </div>
+                        </div>
+                        <div class="flex justify-end gap-4 mt-6 pt-6 border-t">
+                            <button
+                                type="button"
+                                id="cancel-form-button"
+                                class="px-6 py-2.5 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition"
+                            >
+                                Hủy</button
+                            ><button
+                                type="submit"
+                                class="px-6 py-2.5 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                            >
+                                Lưu
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <div
+            id="success-modal"
+            class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0"
+        >
+            <div
+                class="modal-container bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative opacity-0 transform -translate-y-10"
+            >
+                <div class="flex justify-between items-center pb-3 border-b">
+                    <h3 class="text-lg font-bold text-green-600">
+                        Thao tác thành công
+                    </h3>
+                    <button
+                        id="close-success-modal-button"
+                        class="text-gray-400 hover:text-gray-600"
+                    >
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="py-4 flex items-center">
+                    <i
+                        class="fas fa-check-circle w-8 h-8 text-green-500 mr-3"
+                    ></i>
+                    <p>Dữ liệu đã được cập nhật thành công.</p>
+                </div>
+                <div class="flex justify-end pt-3 border-t">
+                    <button
+                        id="ok-success-modal-button"
+                        class="px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition"
+                    >
+                        OK
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            id="delete-confirm-modal"
+            class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0"
+        >
+            <div
+                class="modal-container bg-white w-full max-w-md rounded-lg shadow-lg p-6 relative opacity-0 transform -translate-y-10"
+            >
+                <div class="flex justify-between items-center pb-3 border-b">
+                    <h3 class="text-lg font-bold text-gray-800">
+                        Xác nhận xóa
+                    </h3>
+                    <button
+                        id="close-delete-modal-button"
+                        class="text-gray-400 hover:text-gray-600"
+                    >
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="py-4 flex items-center">
+                    <i
+                        class="fas fa-exclamation-triangle w-8 h-8 text-yellow-500 mr-3"
+                    ></i>
+                    <p>Bạn có chắc chắn muốn xóa sinh viên này?</p>
+                </div>
+                <div class="flex justify-end pt-3 border-t gap-4">
+                    <button
+                        id="cancel-delete-button"
+                        class="px-6 py-2 bg-gray-200 text-gray-800 rounded-lg font-semibold hover:bg-gray-300 transition"
+                    >
+                        Hủy</button
+                    ><button
+                        id="confirm-delete-button"
+                        class="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition"
+                    >
+                        Xóa
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script src="./js/script.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const STORAGE_KEY = "studentMasterList";
+                const loadStudentsFromStorage = () => {
+                    const data = localStorage.getItem(STORAGE_KEY);
+                    if (data) return JSON.parse(data);
+                    const defaultData = {
+                        1686733200000: {
+                            name: "Ngô Minh Trung",
+                            dob: "2004-10-18",
+                            gender: "Nam",
+                            address: "Hải Dương",
+                            cccd: "030204007464",
+                            company: "SAM SUNG",
+                            position: "BACKEND WEB",
+                            studentId: "2251172533",
+                            class: "64KTPM3",
+                            course: "K64",
+                            faculty: "Khoa công nghệ thông tin",
+                            major: "Kỹ thuật phần mềm",
+                            phone: "0985584356",
+                            note: "",
+                            scores: { gd1: "8", gd2: "-", gd3: "-" },
+                            attitude: "Tốt",
+                            status: "Đang thực hiện",
+                            comment:
+                                "Có thái độ tốt trong quá trình tham gia thực tập tại doanh nghiệp, hoàn thành tốt các công việc được giao",
+                        },
+                        1686733300000: {
+                            name: "Đoàn Thanh Tú",
+                            dob: "2004-10-16",
+                            gender: "Nam",
+                            address: "Hà Đông, Hà Nội",
+                            cccd: "00000000000",
+                            company: "VIETTEL",
+                            position: "FRONTEND WEB",
+                            studentId: "2251172540",
+                            class: "64KTPM3",
+                            course: "K64",
+                            faculty: "Khoa công nghệ thông tin",
+                            major: "Kỹ thuật phần mềm",
+                            phone: "0896117823",
+                            note: "",
+                            scores: { gd1: "9", gd2: "-", gd3: "-" },
+                            attitude: "Tốt",
+                            status: "Đang thực hiện",
+                            comment: "",
+                        },
+                    };
+                    saveStudentsToStorage(defaultData);
+                    return defaultData;
+                };
+                const saveStudentsToStorage = (data) =>
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+                let studentDatabase = loadStudentsFromStorage();
+
+                let currentStudentId = null;
+                let formMode = "add";
+
+                const pageList = document.getElementById("page-student-list");
+                const pageForm = document.getElementById("page-student-form");
+
+                const showPage = (pageName) => {
+                    if (pageName === "list") {
+                        pageList.classList.remove("hidden");
+                        pageForm.classList.add("hidden");
+                    } else {
+                        pageList.classList.add("hidden");
+                        pageForm.classList.remove("hidden");
+                    }
+                };
+
+                const showModal = (modal) => {
+                    modal.classList.remove("hidden");
+                    setTimeout(() => {
+                        modal.classList.remove("opacity-0");
+                        modal
+                            .querySelector(".modal-container")
+                            .classList.remove("opacity-0", "-translate-y-10");
+                    }, 10);
+                };
+                const hideModal = (modal, cb) => {
+                    modal.classList.add("opacity-0");
+                    modal
+                        .querySelector(".modal-container")
+                        .classList.add("opacity-0", "-translate-y-10");
+                    setTimeout(() => {
+                        modal.classList.add("hidden");
+                        if (cb) cb();
+                    }, 300);
+                };
+
+                const successModal = document.getElementById("success-modal");
+                const deleteConfirmModal = document.getElementById(
+                    "delete-confirm-modal"
+                );
+
+                document
+                    .getElementById("close-success-modal-button")
+                    .addEventListener("click", () => hideModal(successModal));
+                document
+                    .getElementById("ok-success-modal-button")
+                    .addEventListener("click", () => hideModal(successModal));
+                document
+                    .getElementById("close-delete-modal-button")
+                    .addEventListener("click", () =>
+                        hideModal(deleteConfirmModal)
+                    );
+                document
+                    .getElementById("cancel-delete-button")
+                    .addEventListener("click", () =>
+                        hideModal(deleteConfirmModal)
+                    );
+
+                const populateStudentListTable = () => {
+                    const tableBody = document.getElementById(
+                        "student-list-table-body"
+                    );
+                    const studentArray = Object.values(studentDatabase);
+                    if (studentArray.length === 0) {
+                        tableBody.innerHTML = `<tr><td colspan="9" class="text-center py-4 text-gray-500">Không có sinh viên nào trong danh sách.</td></tr>`;
+                        return;
+                    }
+                    tableBody.innerHTML = Object.keys(studentDatabase)
+                        .map((id, index) => {
+                            const s = studentDatabase[id];
+                            return `<tr data-student-id="${id}" class="bg-white border-b hover:bg-gray-50"><td class="py-3 px-4">${
+                                index + 1
+                            }</td><td class="py-3 px-4 font-medium">${
+                                s.name
+                            }</td><td>${s.dob || ""}</td><td>${
+                                s.gender || ""
+                            }</td><td>${s.address || ""}</td><td>${
+                                s.cccd || ""
+                            }</td><td>${s.company || ""}</td><td>${
+                                s.position || ""
+                            }</td><td class="py-3 px-4 flex gap-3"><button class="text-green-600 hover:text-green-800 edit-btn-list"><i class="fas fa-edit"></i></button><button class="text-red-600 hover:text-red-800 delete-btn-list"><i class="fas fa-trash-alt"></i></button></td></tr>`;
+                        })
+                        .join("");
+                };
+
+                const populateStudentForm = () => {
+                    const form = document.getElementById("student-form");
+                    form.reset();
+                    document
+                        .querySelectorAll(".validation-error")
+                        .forEach((el) => (el.textContent = ""));
+                    document
+                        .querySelectorAll("input.invalid")
+                        .forEach((el) => el.classList.remove("invalid"));
+                    if (
+                        formMode === "edit" &&
+                        currentStudentId &&
+                        studentDatabase[currentStudentId]
+                    ) {
+                        const student = studentDatabase[currentStudentId];
+                        for (const key in student)
+                            if (form.elements[key])
+                                form.elements[key].value = student[key];
+                    }
+                };
+
+                const validateField = (field) => {
+                    const errorEl = field.nextElementSibling;
+                    errorEl.textContent = "";
+                    field.classList.remove("invalid");
+                    if (field.value.trim() === "") {
+                        errorEl.textContent = "Trường này không được để trống.";
+                        field.classList.add("invalid");
+                        return false;
+                    }
+                    return true;
+                };
+
+                document
+                    .getElementById("add-student-button")
+                    .addEventListener("click", () => {
+                        formMode = "add";
+                        currentStudentId = null;
+                        populateStudentForm();
+                        showPage("form");
+                    });
+                document
+                    .getElementById("back-to-list-button")
+                    .addEventListener("click", () => showPage("list"));
+                document
+                    .getElementById("cancel-form-button")
+                    .addEventListener("click", () => showPage("list"));
+
+                document
+                    .getElementById("student-form")
+                    .addEventListener("submit", (e) => {
+                        e.preventDefault();
+                        if (
+                            !validateField(document.getElementById("name")) ||
+                            !validateField(document.getElementById("studentId"))
+                        )
+                            return;
+                        const formData = new FormData(e.target);
+                        const newStudentData = Object.fromEntries(
+                            formData.entries()
+                        );
+                        const idToSave =
+                            formMode === "add"
+                                ? Date.now().toString()
+                                : currentStudentId;
+                        if (formMode === "add") {
+                            newStudentData.scores = {
+                                gd1: "-",
+                                gd2: "-",
+                                gd3: "-",
+                            };
+                            newStudentData.attitude = "";
+                            newStudentData.status = "Chưa thực hiện";
+                            newStudentData.comment = "";
+                        }
+                        studentDatabase[idToSave] = {
+                            ...(studentDatabase[idToSave] || {}),
+                            ...newStudentData,
+                        };
+                        saveStudentsToStorage(studentDatabase);
+                        populateStudentListTable();
+                        showPage("list");
+                        showModal(successModal);
+                    });
+
+                document
+                    .getElementById("student-list-table-body")
+                    .addEventListener("click", (e) => {
+                        const row = e.target.closest("tr");
+                        if (!row) return;
+                        const studentId = row.dataset.studentId;
+
+                        if (e.target.closest(".edit-btn-list")) {
+                            e.preventDefault();
+                            formMode = "edit";
+                            currentStudentId = studentId;
+                            populateStudentForm();
+                            showPage("form");
+                        } else if (e.target.closest(".delete-btn-list")) {
+                            e.preventDefault();
+                            currentStudentId = studentId;
+                            showModal(deleteConfirmModal);
+                        }
+                    });
+
+                document
+                    .getElementById("confirm-delete-button")
+                    .addEventListener("click", () => {
+                        if (currentStudentId) {
+                            delete studentDatabase[currentStudentId];
+                            saveStudentsToStorage(studentDatabase);
+                            populateStudentListTable();
+                            hideModal(deleteConfirmModal);
+                        }
+                    });
+
+                populateStudentListTable();
+                showPage("list");
+            });
+        </script>
+    </body>
+</html>
