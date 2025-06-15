@@ -159,16 +159,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // ---- TOÀN BỘ LOGIC JAVASCRIPT ĐÃ ĐƯỢC DỌN DẸP ----
-
-            // 1. Lấy tất cả các phần tử cần thiết một lần
             const userMenuButton = document.getElementById('user-menu-button');
             const userMenu = document.getElementById('user-menu');
             const navLinks = document.querySelectorAll('.nav-link');
             const pageContents = document.querySelectorAll('.page-content');
             const businessTableBody = document.getElementById('business-table-body');
             
-            // Các modal
             const addBusinessModal = document.getElementById('add-business-modal');
             const editBusinessModal = document.getElementById('edit-business-modal');
             const deleteConfirmModal = document.getElementById('delete-confirm-modal');
@@ -177,11 +173,9 @@
             const updateSuccessAlertModal = document.getElementById('update-success-alert-modal');
             const deleteSuccessAlertModal = document.getElementById('delete-success-alert-modal');
 
-            // Các form
             const addBusinessForm = document.getElementById('add-business-form');
             const editBusinessForm = document.getElementById('edit-business-form');
 
-            // Các nút
             const addBusinessBtn = document.getElementById('add-business-btn');
             const closeModalBtn = document.getElementById('close-modal-btn');
             const cancelBtn = document.getElementById('cancel-btn');
@@ -199,12 +193,10 @@
             let currentRowBeingEdited = null;
             let rowToBeDeleted = null;
 
-            // 2. Logic chung
             if (userMenuButton) { userMenuButton.addEventListener('click', (e) => { userMenu.classList.toggle('hidden'); e.stopPropagation(); }); document.addEventListener('click', (e) => { if (userMenu && !userMenu.contains(e.target) && !userMenuButton.contains(e.target)) { userMenu.classList.add('hidden'); } }); }
             navLinks.forEach(link => { link.addEventListener('click', function(e) { e.preventDefault(); const targetId = this.getAttribute('data-target'); navLinks.forEach(nav => nav.classList.remove('active')); this.classList.add('active'); pageContents.forEach(page => page.id === targetId ? page.classList.remove('hidden') : page.classList.add('hidden')); }); });
             if (logoutButton) { logoutButton.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'login.html'; }); }
             
-            // 3. Logic Thêm Doanh nghiệp
             addBusinessBtn.addEventListener('click', () => addBusinessModal.classList.remove('hidden'));
             const closeAddModal = () => { addBusinessModal.classList.add('hidden'); addBusinessForm.reset(); };
             closeModalBtn.addEventListener('click', closeAddModal);
@@ -222,7 +214,6 @@
                 }
             });
 
-            // 4. Logic Sửa và Xóa (dùng Event Delegation)
             businessTableBody.addEventListener('click', (e) => {
                 const editBtn = e.target.closest('.edit-btn');
                 const deleteBtn = e.target.closest('.delete-btn');
@@ -243,7 +234,6 @@
                 }
             });
 
-            // 5. Logic Form Sửa
             const closeEditModal = () => editBusinessModal.classList.add('hidden');
             closeEditModalBtn.addEventListener('click', closeEditModal);
             cancelEditBtn.addEventListener('click', closeEditModal);
@@ -259,7 +249,6 @@
                 updateSuccessAlertModal.classList.remove('hidden');
             });
 
-            // 6. Logic Form Xóa
             const closeDeleteConfirm = () => deleteConfirmModal.classList.add('hidden');
             closeDeleteConfirmBtn.addEventListener('click', closeDeleteConfirm);
             cancelDeleteBtn.addEventListener('click', closeDeleteConfirm);
@@ -272,12 +261,10 @@
                 deleteSuccessAlertModal.classList.remove('hidden');
             });
             
-            // 7. Đóng các modal thông báo
             closeErrorAlertBtn.addEventListener('click', () => errorAlertModal.classList.add('hidden'));
             closeUpdateSuccessAlertBtn.addEventListener('click', () => updateSuccessAlertModal.classList.add('hidden'));
             closeDeleteSuccessAlertBtn.addEventListener('click', () => deleteSuccessAlertModal.classList.add('hidden'));
             
-            // 8. Hàm hỗ trợ
             function addRowToTable(data) {
                 const newRow = businessTableBody.insertRow();
                 newRow.className = 'bg-white border-b hover:bg-gray-50';

@@ -127,7 +127,7 @@ function initLoginPage() {
             loginMessage.classList.add('text-green-600');
             localStorage.setItem('tluUser', JSON.stringify({ username, role }));
             setTimeout(() => {
-                if (role === 'admin') window.location.href = 'admin.html';
+                if (role === 'admin') window.location.href = 'quanlydoanhnghip.html';
                 else if (role === 'lecturer') window.location.href = 'teacher.html';
                 else window.location.href = 'indexStudent.html';
             }, 1000);
@@ -145,12 +145,10 @@ function initLoginPage() {
 }
 
 
-// --- INTERNSHIP REGISTRATION PAGE SCRIPT (dangky.html) ---
 function initDangKyPage() {
     const internshipForm = document.getElementById('internship-form');
     if (!internshipForm) return;
 
-    // --- Get Elements ---
     const studentIdInput = document.getElementById('student-id');
     const fullNameInput = document.getElementById('full-name');
     const phoneNumberInput = document.getElementById('phone-number');
@@ -160,12 +158,10 @@ function initDangKyPage() {
     const internshipPositionInput = document.getElementById('internship-position');
     const internshipPositionLabel = document.getElementById('internship-position-label');
 
-    // Modals
     const confirmModal = document.getElementById('confirm-modal');
     const emailVerificationModal = document.getElementById('email-verification-modal');
     const successModal = document.getElementById('success-modal');
 
-    // Modal Buttons
     const openConfirmModalButton = document.getElementById('open-confirm-modal');
     const cancelConfirmButton = document.getElementById('cancel-confirm');
     const acceptConfirmButton = document.getElementById('accept-confirm');
@@ -174,21 +170,18 @@ function initDangKyPage() {
     const closeSuccessModal = document.getElementById('close-success-modal');
     const goToHistoryButton = document.getElementById('go-to-history-button');
 
-    // Modal Content
     const verificationEmail = document.getElementById('verification-email');
     const verificationCodeInput = document.getElementById('verification-code-input');
     const verificationError = document.getElementById('verification-error');
     const verificationEnvelopeIcon = document.getElementById('verification-envelope-icon');
-    const simulatedCodeDisplay = document.getElementById('simulated-code-display'); // Lấy element mới
+    const simulatedCodeDisplay = document.getElementById('simulated-code-display'); 
 
 
-    // Conditional elements
     const conditionalFields = document.getElementById('conditional-fields');
     const startDateInput = document.getElementById('start-date');
     const endDateInput = document.getElementById('end-date');
     const facilityNameInput = document.getElementById('facility-name');
 
-    // Message elements
     const studentIdMessage = document.getElementById('student-id-message');
     const phoneNumberMessage = document.getElementById('phone-number-message');
     const addressMessage = document.getElementById('address-message');
@@ -196,7 +189,6 @@ function initDangKyPage() {
     const facilityMessage = document.getElementById('facility-message');
     const internshipPositionMessage = document.getElementById('internship-position-message');
 
-    // --- State & Simulated Data ---
     let generatedCode = null;
     const SIMULATED_EXISTING_STUDENT_IDS = ["2251172557", "1234567890", "0987654321", "2251172540", "2251172266", "2251172279",
         "2251172272", "2251172371", "2251172378", "2251172518", "2251172455", "2251172290", "2251172533", "2251172540", "2251172244",
@@ -266,7 +258,6 @@ function initDangKyPage() {
         "2251172510": "Đỗ Văn Thiệu"
     };
 
-    // --- Functions (No changes in these sub-functions) ---
     function handleFacilityStatusChange() {
         if (hasFacilityRadio.checked) {
             conditionalFields.classList.remove('hidden');
@@ -412,7 +403,6 @@ function initDangKyPage() {
         }
     }
 
-    // --- Event Listeners (Main changes are here) ---
     studentIdInput.addEventListener('blur', validateStudentId);
     phoneNumberInput.addEventListener('blur', validatePhoneNumber);
     addressInput.addEventListener('blur', () => validateRequiredField(addressInput, addressMessage, "Địa chỉ không được bỏ trống."));
@@ -429,7 +419,6 @@ function initDangKyPage() {
         validateStartDate();
     });
 
-    // Step 1: Open Confirmation Modal
     openConfirmModalButton.addEventListener('click', () => {
         if (!validateForm(true)) {
             showToast('Vui lòng kiểm tra lại các thông tin đã nhập.', 'error');
@@ -458,12 +447,10 @@ function initDangKyPage() {
 
     cancelConfirmButton.addEventListener('click', () => confirmModal.classList.add('hidden'));
 
-    // Step 2: Open Email Verification Modal
     acceptConfirmButton.addEventListener('click', () => {
         confirmModal.classList.add('hidden');
         generatedCode = Math.floor(100000 + Math.random() * 900000).toString();
 
-        // **MỚI: Hiển thị mã giả lập**
         simulatedCodeDisplay.textContent = `(Mã giả lập để test: ${generatedCode})`;
         simulatedCodeDisplay.classList.remove('hidden');
 
@@ -478,14 +465,12 @@ function initDangKyPage() {
         verificationCodeInput.focus();
     });
 
-    // **MỚI: Thay đổi hành vi nút X**
     closeVerificationModal.addEventListener('click', () => {
         emailVerificationModal.classList.add('hidden');
-        simulatedCodeDisplay.classList.add('hidden'); // Ẩn mã giả lập khi đóng
-        confirmModal.classList.remove('hidden'); // Mở lại modal xác nhận thông tin
+        simulatedCodeDisplay.classList.add('hidden'); 
+        confirmModal.classList.remove('hidden'); 
     });
 
-    // Step 3: Verify Code and Show Success
     submitVerificationCodeButton.addEventListener('click', () => {
         const enteredCode = verificationCodeInput.value.trim();
 
@@ -509,7 +494,6 @@ function initDangKyPage() {
             return;
         }
 
-        // Correct code
         emailVerificationModal.classList.add('hidden');
         simulatedCodeDisplay.classList.add('hidden');
 
@@ -524,7 +508,6 @@ function initDangKyPage() {
     });
 
 
-    // Khi người dùng nhập lại, bỏ trạng thái lỗi
     verificationCodeInput.addEventListener('input', () => {
         verificationCodeInput.classList.remove('border-red-500');
         verificationEnvelopeIcon.classList.remove('error');
@@ -532,7 +515,6 @@ function initDangKyPage() {
     });
 
 
-    // Step 4: Final Actions from Success Modal
     closeSuccessModal.addEventListener('click', () => {
         successModal.classList.add('hidden');
     });
@@ -541,27 +523,21 @@ function initDangKyPage() {
         window.location.href = 'lichsu.html';
     });
 
-    // --- Initial State Setup ---
     handleFacilityStatusChange();
 }
 
-// --- REGISTRATION HISTORY PAGE SCRIPT (lichsu.html) ---
 function initLichSuPage() {
-    // 1. Lấy tất cả các phần tử cần thiết từ trang HTML
     const loading = document.getElementById('history-loading');
     const tableContainer = document.getElementById('history-table-container');
     const empty = document.getElementById('history-empty');
 
-    // 2. Kiểm tra xem các phần tử có tồn tại không
     if (!loading || !tableContainer || !empty) {
         console.error("Lỗi: Một hoặc nhiều phần tử của trang lịch sử không được tìm thấy.");
         return;
     }
 
-    // 3. Ẩn thông báo "Đang tải" ngay lập tức để tránh bị kẹt
     loading.style.display = 'none';
 
-    // 4. Đọc và xử lý dữ liệu từ localStorage một cách an toàn
     let history = [];
     try {
         const storedData = localStorage.getItem('thuyloiInternshipRegistrations');
@@ -570,18 +546,15 @@ function initLichSuPage() {
         }
     } catch (e) {
         console.error("Lỗi khi đọc dữ liệu từ localStorage:", e);
-        history = []; // Đặt lại thành mảng rỗng nếu có lỗi
+        history = []; 
     }
 
-    // 5. Kiểm tra xem có lịch sử đăng ký nào không
     if (!history || history.length === 0) {
-        // Nếu không có, hiển thị thông báo "Chưa có đăng ký nào"
         empty.style.display = '';
         tableContainer.style.display = 'none';
         return;
     }
 
-    // Nếu có lịch sử, tạo và hiển thị bảng dữ liệu
     let html = `<div class='w-full' style='overflow-x: auto;'><table class='table' style='table-layout:auto; width: 100%;'><thead><tr>
         <th>Mã SV</th>
         <th>Họ tên</th>
