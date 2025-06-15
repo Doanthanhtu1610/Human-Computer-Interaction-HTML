@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Quản trị - Đại học Thủy Lợi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+        .sidebar { background-color: #003366; color: #ffffff; }
+        .sidebar a { color: #e5e7eb; transition: background-color 0.2s, color 0.2s; cursor: pointer; }
+        .sidebar a:hover { background-color: #1d6ab7; }
+        .sidebar a.active { background-color: #00509E; font-weight: 600; }
+        .university-name-primary { color: #ffffff; font-weight: 700; font-size: 0.8rem; line-height: 1.2; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); }
+        .university-name-secondary { color: #d1d5db; font-weight: 400; font-size: 0.75rem; letter-spacing: 0.5px; }
+        .stat-card, .quick-link-card { background-color: white; border-radius: 0.75rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .quick-link-card { padding: 1.5rem; text-align: center; transition: transform 0.2s, box-shadow 0.2s; color: #374151; }
+        .quick-link-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); color: #1d4ed8; }
+        .quick-link-icon { font-size: 2.25rem; margin-bottom: 0.75rem; display: inline-block; }
+        .stat-card { padding: 1.5rem; }
+    </style>
+</head>
+
+<body class="flex h-screen">
+
+    <aside class="sidebar w-72 min-h-screen p-5 flex flex-col flex-shrink-0">
+        <div class="flex items-center mb-10">
+            <img src="https://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" alt="Logo Đại học Thủy Lợi" class="h-12 w-12 mr-3 flex-shrink-0 object-contain">
+            <div>
+                <h1 class="university-name-primary">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+                <p class="university-name-secondary mt-1">THUYLOI UNIVERSITY</p>
+            </div>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="mb-2.5"><a data-target="dashboard" class="nav-link flex items-center py-3 px-3.5 rounded-md text-sm border border-blue-400 border-opacity-30 active"><i class="fas fa-home w-5 mr-3.5"></i> Trang chủ</a></li>
+                <li class="mb-2.5"><a data-target="business-management" class="nav-link flex items-center py-3 px-3.5 rounded-md text-sm border border-blue-400 border-opacity-30"><i class="fas fa-briefcase w-5 mr-3.5"></i> Quản lý doanh nghiệp</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-gray-50">
+        <header class="bg-white shadow-sm p-4 flex justify-end items-center flex-shrink-0">
+            <div class="relative">
+                <div id="user-menu-button" class="flex items-center cursor-pointer">
+                    <img src="https://i.pravatar.cc/150?img=25" alt="Avatar Nguyễn Thị Thu Hương" class="h-9 w-9 rounded-full mr-2 object-cover">
+                    <div><p class="text-sm font-medium text-gray-700">Nguyễn Thị Thu Hương</p><p class="text-xs text-gray-500">Quản lý khoa</p></div>
+                    <i class="fas fa-chevron-down text-xs text-gray-400 ml-2"></i>
+                </div>
+                <div id="user-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
+                    <a href="#" id="logout-button" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"><i class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"></i> Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 p-6 md:p-8 overflow-y-auto">
+            <div id="dashboard" class="page-content">
+                <section class="mb-10 p-6 bg-white rounded-xl shadow-lg">
+                    <h2 class="text-xl font-bold text-gray-800 mb-3">Chào mừng bạn quay trở lại.</h2>
+                    <p class="text-gray-600 leading-relaxed">Đây là những gì đang diễn ra với chương trình thực tập của sinh viên....</p>
+                </section>
+                <section class="mb-10">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-6">Những Con Số Nổi Bật</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="stat-card"><div class="flex items-center text-blue-600 mb-2"><i class="fas fa-users text-3xl mr-3"></i><span class="text-4xl font-bold">5,000+</span></div><p class="text-gray-600 font-medium">Số sinh viên đang quản lý</p></div>
+                        <div class="stat-card"><div class="flex items-center text-green-600 mb-2"><i class="fas fa-building text-3xl mr-3"></i><span class="text-4xl font-bold">1000+</span></div><p class="text-gray-600 font-medium">Số doanh nghiệp đang quản lý</p></div>
+                        <div class="stat-card"><div class="flex items-center text-purple-600 mb-2"><i class="fas fa-clipboard-check text-3xl mr-3"></i><span class="text-4xl font-bold">4500+</span></div><p class="text-gray-600 font-medium">Sinh viên đang thực tập</p></div>
+                        <div class="stat-card"><div class="flex items-center text-red-600 mb-2"><i class="fas fa-building-columns text-3xl mr-3"></i><span class="text-4xl font-bold">65+</span></div><p class="text-gray-600 font-medium">Năm xây dựng & phát triển</p></div>
+                    </div>
+                </section>
+                <section>
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-6">Khám Phá Thêm</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                        <a href="#" class="quick-link-card"><i class="fas fa-bullhorn quick-link-icon"></i><h4 class="font-semibold text-lg mb-1">Tin tức & Sự kiện</h4><p class="text-sm">Cập nhật thông tin mới nhất.</p></a>
+                        <a href="#" class="quick-link-card"><i class="fas fa-book-open quick-link-icon"></i><h4 class="font-semibold text-lg mb-1">Chương trình Đào tạo</h4><p class="text-sm">Tìm hiểu các ngành học.</p></a>
+                        <a href="#" class="quick-link-card"><i class="fas fa-user-plus quick-link-icon"></i><h4 class="font-semibold text-lg mb-1">Tuyển sinh</h4><p class="text-sm">Thông tin cho thí sinh.</p></a>
+                        <a href="#" class="quick-link-card"><i class="fas fa-microscope quick-link-icon"></i><h4 class="font-semibold text-lg mb-1">Nghiên cứu Khoa học</h4><p class="text-sm">Các đề tài và công bố.</p></a>
+                    </div>
+                </section>
+            </div>
+            
+            <div id="business-management" class="page-content hidden">
+                <h1 class="text-3xl font-bold text-gray-800 mb-6">Quản lý doanh nghiệp</h1>
+                <div class="flex flex-col md:flex-row justify-between items-center mb-4 gap-4">
+                    <div class="relative w-full md:w-auto"><i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i><input type="text" placeholder="Tìm kiếm..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-md w-full md:w-80 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"></div>
+                    <button id="add-business-btn" class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-md w-full md:w-auto hover:bg-blue-700 transition flex items-center justify-center gap-2"><i class="fa-solid fa-plus"></i>Thêm doanh nghiệp</button>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-gray-600">
+                             <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">STT</th><th scope="col" class="px-6 py-3">Tên đơn vị</th><th scope="col" class="px-6 py-3">Địa chỉ</th><th scope="col" class="px-6 py-3">Người liên hệ</th><th scope="col" class="px-6 py-3">Chuyên ngành</th><th scope="col" class="px-6 py-3">SL SV thực tập</th><th scope="col" class="px-6 py-3">SL SV tối đa</th><th scope="col" class="px-6 py-3">Chú thích</th><th scope="col" class="px-6 py-3 text-center">Hành động</th>
+                                </tr>
+                            </thead>
+                            <tbody id="business-table-body">
+                                <tr class="bg-white border-b hover:bg-gray-50">
+                                    <td class="px-6 py-4">1</td><td class="px-6 py-4 font-medium text-gray-900">SAMSUNG</td><td class="px-6 py-4">Hà Nội</td><td class="px-6 py-4">Nguyễn Ngọc Phước</td><td class="px-6 py-4">Lập trình Web</td><td class="px-6 py-4">20</td><td class="px-6 py-4">50</td><td class="px-6 py-4"></td>
+                                    <td class="px-6 py-4">
+                                        <div class="flex items-center justify-center gap-4">
+                                            <a href="#" class="text-blue-600 hover:text-blue-800 edit-btn" title="Chỉnh sửa"><i class="fas fa-pencil-alt"></i></a>
+                                            <a href="#" class="text-red-600 hover:text-red-800 delete-btn" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center mt-auto py-4 border-t border-gray-200 bg-white"><p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi. Mọi quyền được bảo lưu.</p></footer>
+    </main>
+
+    <div id="add-business-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md m-4">
+            <div class="flex justify-between items-center p-4 border-b"><h3 class="text-xl font-semibold text-gray-800">Thêm doanh nghiệp</h3><button id="close-modal-btn" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times fa-lg"></i></button></div>
+            <form id="add-business-form" class="p-6 space-y-4">
+                <div><label for="ten-don-vi" class="block mb-1 text-sm font-medium text-gray-700">Tên đơn vị:</label><input type="text" id="ten-don-vi" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div><label for="dia-chi" class="block mb-1 text-sm font-medium text-gray-700">Địa chỉ:</label><input type="text" id="dia-chi" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div><label for="nguoi-lien-he" class="block mb-1 text-sm font-medium text-gray-700">Người liên hệ:</label><input type="text" id="nguoi-lien-he" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div><label for="linh-vuc" class="block mb-1 text-sm font-medium text-gray-700">Lĩnh vực:</label><input type="text" id="linh-vuc" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div class="flex justify-end items-center pt-4 gap-3"><button type="submit" class="px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">OK</button><button id="cancel-btn" type="button" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button></div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="edit-business-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md m-4">
+            <div class="flex justify-between items-center p-4 border-b"><h3 class="text-xl font-semibold text-gray-800">Sửa thông tin doanh nghiệp</h3><button id="close-edit-modal-btn" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times fa-lg"></i></button></div>
+            <form id="edit-business-form" class="p-6 space-y-4">
+                <div><label for="edit-ten-don-vi" class="block mb-1 text-sm font-medium text-gray-700">Tên đơn vị:</label><input type="text" id="edit-ten-don-vi" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div><label for="edit-dia-chi" class="block mb-1 text-sm font-medium text-gray-700">Địa chỉ:</label><input type="text" id="edit-dia-chi" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div><label for="edit-nguoi-lien-he" class="block mb-1 text-sm font-medium text-gray-700">Người liên hệ:</label><input type="text" id="edit-nguoi-lien-he" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div><label for="edit-linh-vuc" class="block mb-1 text-sm font-medium text-gray-700">Lĩnh vực:</label><input type="text" id="edit-linh-vuc" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"></div>
+                <div class="flex justify-end items-center pt-4 gap-3"><button type="submit" class="px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">OK</button><button id="cancel-edit-btn" type="button" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button></div>
+            </form>
+        </div>
+    </div>
+    
+    <div id="delete-confirm-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md m-4">
+            <div class="flex justify-between items-center p-4 border-b"><h3 class="text-xl font-semibold text-gray-800">Thông báo</h3><button id="close-delete-confirm-btn" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times fa-lg"></i></button></div>
+            <div class="p-6 text-center"><p class="text-gray-700 text-lg">Bạn có chắc chắn muốn xóa doanh nghiệp thực tập này không?</p></div>
+            <div class="flex justify-end items-center p-4 bg-gray-50 rounded-b-lg gap-3">
+                <button id="confirm-delete-btn" type="button" class="px-8 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">OK</button>
+                <button id="cancel-delete-btn" type="button" class="px-6 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="error-alert-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"><div class="bg-white rounded-lg shadow-xl w-full max-w-sm m-4 p-6 flex flex-col items-center text-center"><div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-4"><i class="fas fa-times fa-3x text-red-500"></i></div><p class="text-lg font-medium text-gray-700 mb-6">Thông tin không hợp lệ, vui lòng kiểm tra lại</p><button id="close-error-alert-btn" class="px-10 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Đóng</button></div></div>
+    <div id="success-alert-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"><div class="bg-white rounded-lg shadow-xl w-full max-w-sm m-4 p-6 flex flex-col items-center text-center"><div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"><i class="fas fa-check fa-3x text-blue-500"></i></div><p class="text-lg font-medium text-gray-700 mb-6">Thêm Thành công</p><button id="close-success-alert-btn" class="px-10 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">OK</button></div></div>
+    <div id="update-success-alert-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"><div class="bg-white rounded-lg shadow-xl w-full max-w-sm m-4 p-6 flex flex-col items-center text-center"><div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"><i class="fas fa-check fa-3x text-blue-500"></i></div><p class="text-lg font-medium text-gray-700 mb-2">Cập nhật dữ liệu đã được thực hiện thành công.</p><p class="text-gray-600 mb-6">Vui lòng kiểm tra lại thông tin.</p><button id="close-update-success-alert-btn" class="px-10 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">OK</button></div></div>
+    <div id="delete-success-alert-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"><div class="bg-white rounded-lg shadow-xl w-full max-w-sm m-4 p-6 flex flex-col items-center text-center"><div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4"><i class="fas fa-check fa-3x text-blue-500"></i></div><p class="text-lg font-medium text-gray-700 mb-6">Xóa thành công</p><button id="close-delete-success-alert-btn" class="px-10 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">OK</button></div></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---- TOÀN BỘ LOGIC JAVASCRIPT ĐÃ ĐƯỢC DỌN DẸP ----
+
+            // 1. Lấy tất cả các phần tử cần thiết một lần
+            const userMenuButton = document.getElementById('user-menu-button');
+            const userMenu = document.getElementById('user-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageContents = document.querySelectorAll('.page-content');
+            const businessTableBody = document.getElementById('business-table-body');
+            
+            // Các modal
+            const addBusinessModal = document.getElementById('add-business-modal');
+            const editBusinessModal = document.getElementById('edit-business-modal');
+            const deleteConfirmModal = document.getElementById('delete-confirm-modal');
+            const errorAlertModal = document.getElementById('error-alert-modal');
+            const successAlertModal = document.getElementById('success-alert-modal');
+            const updateSuccessAlertModal = document.getElementById('update-success-alert-modal');
+            const deleteSuccessAlertModal = document.getElementById('delete-success-alert-modal');
+
+            // Các form
+            const addBusinessForm = document.getElementById('add-business-form');
+            const editBusinessForm = document.getElementById('edit-business-form');
+
+            // Các nút
+            const addBusinessBtn = document.getElementById('add-business-btn');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const cancelBtn = document.getElementById('cancel-btn');
+            const closeEditModalBtn = document.getElementById('close-edit-modal-btn');
+            const cancelEditBtn = document.getElementById('cancel-edit-btn');
+            const closeDeleteConfirmBtn = document.getElementById('close-delete-confirm-btn');
+            const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+            const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+            const closeErrorAlertBtn = document.getElementById('close-error-alert-btn');
+            const closeSuccessAlertBtn = document.getElementById('close-success-alert-btn');
+            const closeUpdateSuccessAlertBtn = document.getElementById('close-update-success-alert-btn');
+            const closeDeleteSuccessAlertBtn = document.getElementById('close-delete-success-alert-btn');
+            const logoutButton = document.getElementById('logout-button');
+
+            let currentRowBeingEdited = null;
+            let rowToBeDeleted = null;
+
+            // 2. Logic chung
+            if (userMenuButton) { userMenuButton.addEventListener('click', (e) => { userMenu.classList.toggle('hidden'); e.stopPropagation(); }); document.addEventListener('click', (e) => { if (userMenu && !userMenu.contains(e.target) && !userMenuButton.contains(e.target)) { userMenu.classList.add('hidden'); } }); }
+            navLinks.forEach(link => { link.addEventListener('click', function(e) { e.preventDefault(); const targetId = this.getAttribute('data-target'); navLinks.forEach(nav => nav.classList.remove('active')); this.classList.add('active'); pageContents.forEach(page => page.id === targetId ? page.classList.remove('hidden') : page.classList.add('hidden')); }); });
+            if (logoutButton) { logoutButton.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'login.html'; }); }
+            
+            // 3. Logic Thêm Doanh nghiệp
+            addBusinessBtn.addEventListener('click', () => addBusinessModal.classList.remove('hidden'));
+            const closeAddModal = () => { addBusinessModal.classList.add('hidden'); addBusinessForm.reset(); };
+            closeModalBtn.addEventListener('click', closeAddModal);
+            cancelBtn.addEventListener('click', closeAddModal);
+            
+            addBusinessForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = { tenDonVi: document.getElementById('ten-don-vi').value.trim(), diaChi: document.getElementById('dia-chi').value.trim(), nguoiLienHe: document.getElementById('nguoi-lien-he').value.trim(), linhVuc: document.getElementById('linh-vuc').value.trim() };
+                if (Object.values(data).some(v => !v)) {
+                    errorAlertModal.classList.remove('hidden');
+                } else {
+                    closeAddModal();
+                    successAlertModal.classList.remove('hidden');
+                    closeSuccessAlertBtn.onclick = () => { successAlertModal.classList.add('hidden'); addRowToTable(data); };
+                }
+            });
+
+            // 4. Logic Sửa và Xóa (dùng Event Delegation)
+            businessTableBody.addEventListener('click', (e) => {
+                const editBtn = e.target.closest('.edit-btn');
+                const deleteBtn = e.target.closest('.delete-btn');
+                if (editBtn) {
+                    e.preventDefault();
+                    currentRowBeingEdited = editBtn.closest('tr');
+                    const cells = currentRowBeingEdited.cells;
+                    document.getElementById('edit-ten-don-vi').value = cells[1].textContent;
+                    document.getElementById('edit-dia-chi').value = cells[2].textContent;
+                    document.getElementById('edit-nguoi-lien-he').value = cells[3].textContent;
+                    document.getElementById('edit-linh-vuc').value = cells[4].textContent;
+                    editBusinessModal.classList.remove('hidden');
+                }
+                if (deleteBtn) {
+                    e.preventDefault();
+                    rowToBeDeleted = deleteBtn.closest('tr');
+                    deleteConfirmModal.classList.remove('hidden');
+                }
+            });
+
+            // 5. Logic Form Sửa
+            const closeEditModal = () => editBusinessModal.classList.add('hidden');
+            closeEditModalBtn.addEventListener('click', closeEditModal);
+            cancelEditBtn.addEventListener('click', closeEditModal);
+            editBusinessForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const data = { tenDonVi: document.getElementById('edit-ten-don-vi').value.trim(), diaChi: document.getElementById('edit-dia-chi').value.trim(), nguoiLienHe: document.getElementById('edit-nguoi-lien-he').value.trim(), linhVuc: document.getElementById('edit-linh-vuc').value.trim() };
+                if (Object.values(data).some(v => !v)) { errorAlertModal.classList.remove('hidden'); return; }
+                if (currentRowBeingEdited) {
+                    const cells = currentRowBeingEdited.cells;
+                    cells[1].textContent = data.tenDonVi; cells[2].textContent = data.diaChi; cells[3].textContent = data.nguoiLienHe; cells[4].textContent = data.linhVuc;
+                }
+                closeEditModal();
+                updateSuccessAlertModal.classList.remove('hidden');
+            });
+
+            // 6. Logic Form Xóa
+            const closeDeleteConfirm = () => deleteConfirmModal.classList.add('hidden');
+            closeDeleteConfirmBtn.addEventListener('click', closeDeleteConfirm);
+            cancelDeleteBtn.addEventListener('click', closeDeleteConfirm);
+            confirmDeleteBtn.addEventListener('click', () => {
+                if (rowToBeDeleted) {
+                    rowToBeDeleted.remove();
+                    updateRowIndexes();
+                }
+                closeDeleteConfirm();
+                deleteSuccessAlertModal.classList.remove('hidden');
+            });
+            
+            // 7. Đóng các modal thông báo
+            closeErrorAlertBtn.addEventListener('click', () => errorAlertModal.classList.add('hidden'));
+            closeUpdateSuccessAlertBtn.addEventListener('click', () => updateSuccessAlertModal.classList.add('hidden'));
+            closeDeleteSuccessAlertBtn.addEventListener('click', () => deleteSuccessAlertModal.classList.add('hidden'));
+            
+            // 8. Hàm hỗ trợ
+            function addRowToTable(data) {
+                const newRow = businessTableBody.insertRow();
+                newRow.className = 'bg-white border-b hover:bg-gray-50';
+                newRow.innerHTML = `
+                    <td class="px-6 py-4">${businessTableBody.rows.length}</td>
+                    <td class="px-6 py-4 font-medium text-gray-900">${data.tenDonVi}</td>
+                    <td class="px-6 py-4">${data.diaChi}</td>
+                    <td class="px-6 py-4">${data.nguoiLienHe}</td>
+                    <td class="px-6 py-4">${data.linhVuc}</td>
+                    <td class="px-6 py-4">0</td>
+                    <td class="px-6 py-4">0</td>
+                    <td class="px-6 py-4"></td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center justify-center gap-4">
+                            <a href="#" class="text-blue-600 hover:text-blue-800 edit-btn" title="Chỉnh sửa"><i class="fas fa-pencil-alt"></i></a>
+                            <a href="#" class="text-red-600 hover:text-red-800 delete-btn" title="Xóa"><i class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </td>`;
+            }
+            function updateRowIndexes() {
+                const rows = businessTableBody.rows;
+                for (let i = 0; i < rows.length; i++) {
+                    rows[i].cells[0].textContent = i + 1;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
