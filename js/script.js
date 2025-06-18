@@ -116,9 +116,9 @@ function initLoginPage() {
         const password = loginForm.password.value;
         let role = null;
 
-        if (username === 'admin' && password === 'password123') role = 'admin';
-        else if (username === 'teacher@example.com' && password === 'password123') role = 'lecturer';
-        else if (username === 'student@example.com' && password === 'password123') role = 'student';
+        if (username === 'admin' && password === '123456') role = 'admin';
+        else if (username === 'teacher' && password === '123456') role = 'lecturer';
+        else if (username === '2251172557@e.tlu.edu.vn' && password === '123456') role = 'student';
 
         const loginMessage = document.getElementById('login-message');
         if (role) {
