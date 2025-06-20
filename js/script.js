@@ -93,7 +93,7 @@ function initUserMenu() {
         e.preventDefault();
         localStorage.removeItem('tluUser');
         localStorage.removeItem('thuyloiInternshipRegistrations');
-        window.location.href = 'login.html';
+        window.location.href = '../login.html';
     });
 
     window.addEventListener('click', (e) => {
@@ -122,14 +122,14 @@ function initLoginPage() {
 
         const loginMessage = document.getElementById('login-message');
         if (role) {
-            loginMessage.textContent = 'Đăng nhập thành công! Đang chuyển hướng...';
+            loginMessage.textContent = 'Đăng nhập thành công!';
             loginMessage.classList.remove('text-red-600');
             loginMessage.classList.add('text-green-600');
             localStorage.setItem('tluUser', JSON.stringify({ username, role }));
             setTimeout(() => {
-                if (role === 'admin') window.location.href = 'quanlydoanhnghip.html';
-                else if (role === 'lecturer') window.location.href = 'teacher.html';
-                else window.location.href = 'indexStudent.html';
+                if (role === 'admin') window.location.href = './admin/quanlydoanhnghip.html';
+                else if (role === 'lecturer') window.location.href = './giangvien/teacher.html';
+                else window.location.href = './sinhvien/indexStudent.html';
             }, 1000);
         } else {
             loginMessage.textContent = 'Sai email hoặc mật khẩu!';
@@ -507,7 +507,6 @@ function initDangKyPage() {
         handleFacilityStatusChange();
     });
 
-
     verificationCodeInput.addEventListener('input', () => {
         verificationCodeInput.classList.remove('border-red-500');
         verificationEnvelopeIcon.classList.remove('error');
@@ -546,7 +545,7 @@ function initLichSuPage() {
         }
     } catch (e) {
         console.error("Lỗi khi đọc dữ liệu từ localStorage:", e);
-        history = []; 
+        history = [];
     }
 
     if (!history || history.length === 0) {

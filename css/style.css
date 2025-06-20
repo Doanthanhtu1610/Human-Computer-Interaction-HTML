@@ -182,7 +182,6 @@ input[type="date"].date-placeholder:valid::before {
 }
 
 
-/* --- Homepage Card Styles (indexStudent) --- */
 .stat-card,
 .quick-link-card {
     background-color: white;
@@ -232,7 +231,6 @@ input[type="date"].date-placeholder:valid::before {
     margin-bottom: 0;
 }
 
-/* --- History Page Table Styles (lichsu) --- */
 .table th,
 .table td {
     padding: 0.75rem 1rem;
@@ -279,20 +277,18 @@ input[type="date"].date-placeholder:valid::before {
     color: #92400e;
 }
 
-/* --- Login Page Styles (login) --- */
 .login-card {
-    border-radius: 1.5rem; /* bo góc nhiều hơn */
+    border-radius: 1.5rem; 
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     transition: all 0.3s ease-in-out;
 }
 
-/* Căn chỉnh lại input để tương thích với icon */
 .form-input.with-icon {
-    padding-left: 2.5rem; /* Tạo không gian cho icon bên trái */
+    padding-left: 2.5rem; 
 }
 
 .login-card .form-input {
-    border-radius: 0.75rem; /* bo góc nhẹ cho input */
+    border-radius: 0.75rem; 
     border: 1px solid #d1d5db;
     background-color: #ffffff;
 }
@@ -330,10 +326,8 @@ input[type="date"].date-placeholder:valid::before {
     animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
 }
 
-/* --- Modal Styles --- */
 .modal-header {
     background-color: #3b82f6;
-    /* bg-blue-500 */
 
     color: white;
 }
@@ -341,10 +335,8 @@ input[type="date"].date-placeholder:valid::before {
 .modal-header button:hover {
 
     color: #d1d5db;
-    /* gray-300 */
 }
 
-/* --- Email Verification Modal --- */
 #email-verification-modal .p-6 {
     text-align: center;
 }
@@ -387,13 +379,9 @@ input[type="date"].date-placeholder:valid::before {
 
 .success-icon-container {
     width: 64px;
-    /* w-16 */
     height: 64px;
-    /* h-16 */
     background-color: #dcfce7;
-    /* bg-green-100 */
     border-radius: 9999px;
-    /* rounded-full */
 
     display: flex;
     align-items: center;
@@ -403,8 +391,6 @@ input[type="date"].date-placeholder:valid::before {
 .success-icon-container .fa-check {
 
     color: #22c55e;
-    /* text-green-500 */
     font-size: 2rem;
-    /* text-3xl approx */
 
 }

@@ -112,7 +112,7 @@
                 </div>
             </div>
         </div>
-        <footer class="text-center mt-auto py-4 border-t border-gray-200 bg-white"><p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi. Mọi quyền được bảo lưu.</p></footer>
+        <footer class="text-center mt-auto py-4 border-t border-gray-200 bg-white"><p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi.</p></footer>
     </main>
 
     <div id="add-business-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40 flex items-center justify-center">
@@ -195,7 +195,7 @@
 
             if (userMenuButton) { userMenuButton.addEventListener('click', (e) => { userMenu.classList.toggle('hidden'); e.stopPropagation(); }); document.addEventListener('click', (e) => { if (userMenu && !userMenu.contains(e.target) && !userMenuButton.contains(e.target)) { userMenu.classList.add('hidden'); } }); }
             navLinks.forEach(link => { link.addEventListener('click', function(e) { e.preventDefault(); const targetId = this.getAttribute('data-target'); navLinks.forEach(nav => nav.classList.remove('active')); this.classList.add('active'); pageContents.forEach(page => page.id === targetId ? page.classList.remove('hidden') : page.classList.add('hidden')); }); });
-            if (logoutButton) { logoutButton.addEventListener('click', (e) => { e.preventDefault(); window.location.href = 'login.html'; }); }
+            if (logoutButton) { logoutButton.addEventListener('click', (e) => { e.preventDefault(); window.location.href = '../login.html'; }); }
             
             addBusinessBtn.addEventListener('click', () => addBusinessModal.classList.remove('hidden'));
             const closeAddModal = () => { addBusinessModal.classList.add('hidden'); addBusinessForm.reset(); };

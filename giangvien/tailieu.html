@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <style>
         .modal-overlay {
             transition: opacity 0.3s ease;
@@ -77,7 +77,7 @@
                 </li>
                 <li class="mb-2.5">
                     <a href="tailieu.html" id="nav-documents"
-                        class="flex items-center py-3 px-3.5 rounded-md text-sm border border-gray-500 bg-blue-700 text-white">
+                        class="flex items-center py-3 px-3.5 rounded-md text-sm border border-gray-500">
                         <i class="fas fa-upload w-5 mr-3.5"></i> Tải lên tài liệu
                     </a>
                 </li>
@@ -101,7 +101,7 @@
                 </div>
                 <div id="user-menu"
                     class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
-                    <a href="login.html" id="logout-button"
+                    <a href="../login.html" id="logout-button"
                         class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
                         <i class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"></i> Đăng
                         xuất
@@ -134,6 +134,9 @@
 
             <div id="document-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
         </div>
+        <footer class="text-center mt-auto py-4 border-t border-gray-200 bg-white">
+            <p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi.</p>
+        </footer>
     </main>
 
     <div id="upload-modal"
@@ -285,9 +288,32 @@
         </div>
     </div>
 
-    <script src="./js/script.js"></script>
+    <script src="../js/script.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const navItems = {
+                home: document.getElementById('nav-home'),
+                evaluation: document.getElementById('nav-evaluation'),
+                studentList: document.getElementById('nav-student-list'),
+                documents: document.getElementById('nav-documents'),
+                internshipToggle: document.getElementById('nav-internship-toggle')
+            };
+
+            const setActiveNav = (activeId) => {
+                const activeClasses = ['bg-blue-700', 'text-white'];
+
+                Object.values(navItems).forEach(item => {
+                    if (item) item.classList.remove(...activeClasses);
+                });
+
+                const activeEl = navItems[activeId];
+                if (activeEl) {
+                    activeEl.classList.add(...activeClasses);
+                    if (activeId === 'evaluation' || activeId === 'studentList') {
+                        if (navItems.internshipToggle) navItems.internshipToggle.classList.add(...activeClasses);
+                    }
+                }
+            };
 
             const STORAGE_KEY = 'teacherDocumentList';
 
@@ -400,6 +426,7 @@
             });
 
             renderDocuments();
+            setActiveNav('documents');
         });
     </script>
 </body>

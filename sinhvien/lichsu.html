@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử đăng ký thực tập - Đại học Thủy Lợi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="flex h-screen">
+    <aside class="sidebar w-96 min-h-screen p-5 flex flex-col">
+        <div class="flex items-center mb-10">
+            <img src="https://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" alt="Logo Đại học Thủy Lợi"
+                class="h-16 w-16 mr-4 flex-shrink-0 object-contain">
+            <div>
+                <h1 class="university-name-primary">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+                <p class="university-name-secondary mt-1">THUYLOI UNIVERSITY</p>
+            </div>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="mb-2.5">
+                    <a href="indexStudent.html" id="nav-home"
+                        class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                        <i class="fas fa-home w-5 mr-3.5"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="mb-2.5">
+                    <button id="nav-internship-toggle"
+                        class="flex items-center justify-between w-full py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                        <span class="flex items-center">
+                            <i class="fas fa-clipboard-list w-5 mr-3.5"></i>
+                            Đăng ký thực tập
+                        </span>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300"
+                            id="nav-internship-arrow"></i>
+                    </button>
+                    <ul id="nav-internship-submenu" class="pl-8 mt-2 space-y-2 hidden">
+                        <li>
+                            <a href="dangky.html" id="nav-register"
+                                class="flex items-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                                <i class="fas fa-bi bi-person-add w-4 mr-2"></i> Đăng ký
+                            </a>
+                        </li>
+                        <li>
+                            <a href="lichsu.html" id="nav-history"
+                                class="flex items-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                                <i class="fas fa-history w-4 mr-2"></i> Lịch sử đăng ký
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="flex-1 flex flex-col">
+        <header class="bg-white shadow-sm p-4 flex justify-end items-center">
+            <div class="relative">
+                <div id="user-menu-button" class="flex items-center cursor-pointer">
+                    <img src="https://placehold.co/36x36/cccccc/1f2937?text=HV" alt="Avatar Hoàng Quang Vinh"
+                        class="h-9 w-9 rounded-full mr-2">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700">Hoàng Quang Vinh</p>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                    <i class="fas f<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký thực tập - Đại học Thủy Lợi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="flex h-screen">
+
+    <aside class="sidebar w-96 min-h-screen p-5 flex flex-col">
+        <div class="flex items-center mb-10">
+            <img src="https://www.tlu.edu.vn/Portals/0/2014/Logo-WRU.png" alt="Logo Đại học Thủy Lợi"
+                class="h-16 w-16 mr-4 flex-shrink-0 object-contain">
+            <div>
+                <h1 class="university-name-primary">TRƯỜNG ĐẠI HỌC THỦY LỢI</h1>
+                <p class="university-name-secondary mt-1">THUYLOI UNIVERSITY</p>
+            </div>
+        </div>
+        <nav class="flex-grow">
+            <ul>
+                <li class="mb-2.5">
+                    <a href="indexStudent.html" id="nav-home"
+                        class="flex items-center py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                        <i class="fas fa-home w-5 mr-3.5"></i> Trang chủ
+                    </a>
+                </li>
+                <li class="mb-2.5">
+                    <button id="nav-internship-toggle"
+                        class="flex items-center justify-between w-full py-3 px-3.5 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                        <span class="flex items-center">
+                            <i class="fas fa-clipboard-list w-5 mr-3.5"></i>
+                            Đăng ký thực tập
+                        </span>
+                        <i class="fas fa-chevron-down text-xs transition-transform duration-300"
+                            id="nav-internship-arrow"></i>
+                    </button>
+                    <ul id="nav-internship-submenu" class="pl-8 mt-2 space-y-2 hidden">
+                        <li>
+                            <a href="dangky.html" id="nav-register"
+                                class="flex items-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                                <i class="fas fa-bi bi-person-add w-4 mr-2"></i> Đăng ký
+                            </a>
+                        </li>
+                        <li>
+                            <a href="lichsu.html" id="nav-history"
+                                class="flex items-center py-2 px-3 rounded-md hover:bg-blue-700 text-sm border border-gray-500">
+                                <i class="fas fa-history w-4 mr-2"></i> Lịch sử đăng ký
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="flex flex-col flex-1">
+        <header class="bg-white shadow-sm p-4 flex justify-end items-center">
+            <div class="relative">
+                <div id="user-menu-button" class="flex items-center cursor-pointer">
+                    <img src="https://placehold.co/36x36/cccccc/1f2937?text=HV" alt="Avatar Hoàng Quang Vinh"
+                        class="h-9 w-9 rounded-full mr-2">
+                    <div>
+                        <p class="text-sm font-medium text-gray-700">Hoàng Quang Vinh</p>
+                        <p class="text-xs text-gray-500">Sinh viên</p>
+                    </div>
+                    <i class="fas fa-chevron-down text-xs text-gray-400 ml-2"></i>
+                </div>
+
+                <div id="user-menu"
+                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
+                    <a href="#" id="logout-button"
+                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 p-6 overflow-y-auto bg-gray-50">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Đăng ký thực tập</h2>
+
+            <div class="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto">
+                <form id="internship-form" action="#" method="POST" novalidate>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+
+                        <div>
+                            <label for="student-id" class="block text-sm font-medium text-gray-700 mb-1">Mã sinh
+                                viên <span class="text-red-500">*</span></label>
+                            <div class="relative"> <span class="input-icon"><i class="fas fa-id-card"></i></span>
+                                <input type="text" name="student-id" id="student-id" placeholder="Ví dụ: 2251172557"
+                                    class="form-input with-icon block w-full py-2 px-3 border" required maxlength="10">
+                            </div>
+                            <p id="student-id-message" class="form-message text-red-600 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Họ và
+                                tên</label>
+                            <div class="relative"> <span class="input-icon"><i class="fas fa-user"></i></span>
+                                <input type="text" name="full-name" id="full-name"
+                                    placeholder="Nhập msv để tự động điền họ tên"
+                                    class="form-input with-icon block w-full py-2 px-3 border bg-gray-100" readonly>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="phone-number" class="block text-sm font-medium text-gray-700 mb-1">Số điện
+                                thoại <span class="text-red-500">*</span></label>
+                            <div class="relative"> <span class="input-icon"><i class="fas fa-phone"></i></span>
+                                <input type="tel" name="phone-number" id="phone-number"
+                                    placeholder="Ví dụ: 0325 905 800"
+                                    class="form-input with-icon block w-full py-2 px-3 border" required>
+                            </div>
+                            <p id="phone-number-message" class="form-message text-red-600 hidden"></p>
+                        </div>
+
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Địa chỉ liên hệ
+                                <span class="text-red-500">*</span></label>
+                            <div class="relative"> <span class="input-icon"><i class="fas fa-map-marker-alt"></i></span>
+                                <input type="text" name="address" id="address" placeholder="Số nhà, đường, phường/xã..."
+                                    class="form-input with-icon block w-full py-2 px-3 border" required>
+                            </div>
+                            <p id="address-message" class="form-message text-red-600 hidden"></p>
+                        </div>
+
+                        <div class="md:col-span-2 mt-1">
+                            <fieldset>
+                                <legend class="block text-sm font-medium text-gray-700 mb-1">Tình trạng cơ sở thực tập
+                                </legend>
+                                <div class="flex items-center space-x-4 mt-1">
+                                    <div class="flex items-center">
+                                        <input id="no-facility" name="facility-status" type="radio" value="no" checked
+                                            class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                        <label for="no-facility" class="ml-2 block text-sm text-gray-700">
+                                            Chưa có cơ sở thực tập
+                                        </label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="has-facility" name="facility-status" type="radio" value="yes"
+                                            class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
+                                        <label for="has-facility" class="ml-2 block text-sm text-gray-700">
+                                            Đã có cơ sở thực tập
+                                        </label>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <div id="conditional-fields"
+                            class="hidden md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
+                            <div>
+                                <label for="start-date" class="block text-sm font-medium text-gray-700 mb-1">Ngày bắt
+                                    đầu thực tập <span class="text-red-500">*</span></label>
+                                <div class="relative"> <span class="input-icon"><i
+                                            class="fas fa-calendar-alt"></i></span>
+                                    <input type="text" name="start-date" id="start-date" placeholder="dd/mm/yyyy"
+                                        class="form-input with-icon block w-full py-2 px-3 border date-placeholder">
+                                </div>
+                                <p id="start-date-message" class="form-message text-red-600 hidden"></p>
+                            </div>
+
+                            <div>
+                                <label for="end-date" class="block text-sm font-medium text-gray-700 mb-1">Ngày dự kiến
+                                    kết thúc</label>
+                                <div class="relative"> <span class="input-icon"><i
+                                            class="fas fa-calendar-check"></i></span>
+                                    <input type="text" name="end-date" id="end-date" placeholder="Tự động tính"
+                                        class="form-input with-icon block w-full py-2 px-3 border bg-gray-100" readonly>
+                                </div>
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label for="facility-name" class="block text-sm font-medium text-gray-700 mb-1">Tên cơ
+                                    sở thực tập <span class="text-red-500">*</span></label>
+                                <div class="relative">
+                                    <span class="input-icon"><i class="fas fa-building"></i></span>
+                                    <input type="text" name="facility-name" id="facility-name"
+                                        placeholder="Nhập tên cơ sở thực tập..."
+                                        class="form-input with-icon block w-full py-2 px-3 border" />
+                                </div>
+                                <p id="facility-message" class="form-message text-red-600 hidden"></p>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="internship-position" class="block text-sm font-medium text-gray-700 mb-1">
+                                <span id="internship-position-label">Vị trí thực tập mong muốn</span> <span
+                                    class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="input-icon"><i class="fas fa-briefcase"></i></span>
+                                <input type="text" name="internship-position" id="internship-position"
+                                    placeholder="Nhập vị trí thực tập mong muốn..."
+                                    class="form-input with-icon block w-full py-2 px-3 border" required />
+                            </div>
+                            <p id="internship-position-message" class="form-message text-red-600 hidden"></p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-gray-200 flex justify-end">
+                        <button type="button" id="open-confirm-modal"
+                            class="btn-primary font-medium py-2.5 px-6 rounded-md shadow-sm hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            <i class="fas fa-paper-plane mr-1.5"></i>
+                            Đăng ký
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div id="confirm-modal"
+                class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+                <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
+                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Xác nhận thông tin đăng ký</h3>
+                    <div class="mb-4 text-gray-700 text-sm" id="confirm-info">
+                    </div>
+                    <div class="flex justify-end gap-3">
+                        <button type="button" id="accept-confirm" class="btn-primary px-5 py-2 rounded">Xác
+                            nhận</button>
+                        <button type="button" id="cancel-confirm" class="btn-secondary px-5 py-2 rounded">Hủy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center mt-auto py-4 border-t border-gray-200 bg-white">
+            <p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi.</p>
+        </footer>
+        <div id="email-verification-modal"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+            <div class="bg-white rounded-lg shadow-lg max-w-md w-full">
+                <div class="modal-header flex justify-between items-center p-4 rounded-t-lg">
+                    <h3 class="text-xl font-semibold">Xác nhận email</h3>
+                    <button id="close-verification-modal" class="text-2xl leading-none">&times;</button>
+                </div>
+                <div class="p-6">
+                    <h4 class="text-lg font-semibold mb-2 text-center">Nhập mã xác nhận</h4>
+                    <p class="text-sm text-gray-600 mb-4 text-center" id="verification-instruction">
+                        Vui lòng kiểm tra email <strong class="font-medium"
+                            id="verification-email"></strong>. và nhập mã xác nhận.
+                    </p>
+
+                    <p id="simulated-code-display"
+                        class="text-sm text-blue-600 font-semibold bg-blue-100 p-2 rounded-md my-2 hidden text-center">
+                    </p>
+
+                    <label for="verification-code-input"
+                        class="block text-sm font-medium text-gray-700 mb-1 text-left">Mã xác nhận</label>
+                    <div class="relative flex items-center mb-1">
+                        <span id="verification-envelope-icon"
+                            class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        <input type="text" id="verification-code-input" name="verification-code-input"
+                            placeholder="Nhập mã xác nhận..." class="form-input block w-full py-2 pl-10 pr-3 border"
+                            autocomplete="off">
+                    </div>
+                    <p id="verification-error" class="text-red-500 text-xs mt-1 mb-2 hidden text-left">Vui lòng nhập mã
+                        xác nhận đã được gửi về email.</p>
+                    <button id="submit-verification-code" class="btn-primary w-full mt-2 py-2.5">Xác nhận</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="success-modal"
+            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 hidden">
+            <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6 text-center relative">
+                <button id="close-success-modal"
+                    class="absolute top-3 right-4 text-2xl text-gray-400 hover:text-gray-600 leading-none">&times;</button>
+                <div class="success-icon-container mx-auto mb-4">
+                    <i class="fas fa-check"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-2">Đăng Ký Thành Công!</h3>
+                <p class="text-gray-600 mb-6">Bạn sẽ sớm nhận được kết quả qua email từ ngành KTPM.</p>
+                <button id="go-to-history-button" class="btn-primary px-8 py-2.5">Lịch sử đăng ký</button>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="toastContainer" class="toast"></div>
+
+    <script src="../js/script.js"></script>
+</body>
+
+</html>a-chevron-down text-xs text-gray-400 ml-2"></i>
+                </div>
+
+                <div id="user-menu"
+                    class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 ring-1 ring-black ring-opacity-5">
+                    <a href="#" id="logout-button"
+                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left">
+                        <i class="fas fa-sign-out-alt w-5 mr-2 text-gray-500"></i>
+                        Đăng xuất
+                    </a>
+                </div>
+            </div>
+        </header>
+        <div class="flex-1 p-6 overflow-y-auto bg-gray-50">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Lịch sử đăng ký thực tập</h2>
+            <div class="bg-white p-6 rounded-lg shadow-md w-full mx-auto">
+                <div id="history-loading" class="text-center text-gray-500 py-8">Đang tải dữ liệu...</div>
+                <div id="history-table-container" class="w-full" style="display:none;"></div>
+                <div id="history-empty" class="text-center text-gray-400 py-8" style="display:none;">Chưa có đăng ký
+                    nào.</div>
+            </div>
+        </div>
+        <footer class="text-center mt-auto py-4 border-t border-gray-200 bg-white">
+            <p class="text-sm text-gray-600">&copy; 2025 Đại học Thủy Lợi.</p>
+        </footer>
+    </main>
+    <script src="../js/script.js"></script>
+</body>
+
+</html>
