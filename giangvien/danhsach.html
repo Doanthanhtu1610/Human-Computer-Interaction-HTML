@@ -166,8 +166,13 @@
                                 <option value="Nữ">Nữ</option>
                                 <option value="Khác">Khác</option>
                             </select></div>
-                        <div><label for="phone" class="text-sm font-medium text-gray-700">Số điện thoại</label><input
-                                type="tel" id="phone" name="phone" class="w-full mt-1 p-2 border rounded-md"></div>
+                        
+                        <div>
+                            <label for="phone" class="text-sm font-medium text-gray-700">Số điện thoại</label>
+                            <input type="tel" id="phone" name="phone" class="w-full mt-1 p-2 border rounded-md" placeholder="VD: 0912345678">
+                            <p id="phoneError" class="text-red-500 text-sm mt-1"></p>
+                        </div>
+                        
                         <div><label for="studentId" class="text-sm font-medium text-gray-700">Mã sinh viên <span
                                     class="text-red-500">*</span></label><input type="text" id="studentId"
                                 name="studentId" class="w-full mt-1 p-2 border rounded-md"><span
@@ -326,18 +331,22 @@
                     return `<tr data-student-id="${id}" class="bg-white border-b hover:bg-gray-50"><td class="py-3 px-4">${index + 1}</td><td class="py-3 px-4 font-medium">${s.name}</td><td>${s.dob || ''}</td><td>${s.gender || ''}</td><td>${s.address || ''}</td><td>${s.cccd || ''}</td><td>${s.company || ''}</td><td>${s.position || ''}</td><td class="py-3 px-4 flex gap-3"><button class="text-green-600 hover:text-green-800 edit-btn-list"><i class="fas fa-edit"></i></button><button class="text-red-600 hover:text-red-800 delete-btn-list"><i class="fas fa-trash-alt"></i></button></td></tr>`;
                 }).join('');
             };
-
+            
             const populateStudentForm = () => {
                 const form = document.getElementById('student-form');
                 form.reset();
                 document.querySelectorAll('.validation-error').forEach(el => el.textContent = '');
                 document.querySelectorAll('input.invalid').forEach(el => el.classList.remove('invalid'));
+                // Clear phone error specifically
+                const phoneError = document.getElementById("phoneError");
+                if(phoneError) phoneError.textContent = '';
+
                 if (formMode === 'edit' && currentStudentId && studentDatabase[currentStudentId]) {
                     const student = studentDatabase[currentStudentId];
                     for (const key in student) if (form.elements[key]) form.elements[key].value = student[key];
                 }
             };
-
+            
             const validateField = (field) => {
                 const errorEl = field.nextElementSibling;
                 errorEl.textContent = '';
@@ -368,6 +377,39 @@
                 return true;
             };
 
+            // --- JavaScript for Phone Validation ---
+            const phoneInput = document.getElementById("phone");
+            const phoneError = document.getElementById("phoneError");
+            const phoneRegex = /^0\d{9}$/;
+
+            function validatePhone() {
+                const phoneNumber = phoneInput.value.trim();
+                phoneError.textContent = ""; 
+                phoneInput.classList.remove("border-red-500");
+
+                if (phoneNumber === "") {
+                    // This can be optional if phone number is not a required field
+                    return true;
+                }
+
+                if (!phoneRegex.test(phoneNumber)) {
+                    phoneError.textContent = "Số điện thoại không hợp lệ (yêu cầu 10 số, bắt đầu bằng 0).";
+                    phoneInput.classList.add("border-red-500"); 
+                    return false;
+                }
+                return true; // Valid
+            }
+
+            phoneInput.addEventListener("blur", validatePhone);
+
+            phoneInput.addEventListener("input", function () {
+                if (phoneInput.classList.contains("border-red-500") && phoneRegex.test(this.value.trim())) {
+                    phoneError.textContent = "";
+                    phoneInput.classList.remove("border-red-500");
+                }
+            });
+            // --- End of Phone Validation Script ---
+
             document.getElementById('add-student-button').addEventListener('click', () => { formMode = 'add'; currentStudentId = null; populateStudentForm(); showPage('form'); });
             document.getElementById('back-to-list-button').addEventListener('click', () => showPage('list'));
             document.getElementById('cancel-form-button').addEventListener('click', () => showPage('list'));
@@ -378,8 +420,9 @@
                 const isNameValid = validateField(document.getElementById('name'));
                 const isStudentIdValid = validateField(document.getElementById('studentId'));
                 const isCccdValid = validateCccdField(document.getElementById('cccd'));
+                const isPhoneValid = validatePhone(); // Validate phone on submit
 
-                if (!isNameValid || !isStudentIdValid || !isCccdValid) {
+                if (!isNameValid || !isStudentIdValid || !isCccdValid || !isPhoneValid) { // Check all validations
                     return;
                 }
 
